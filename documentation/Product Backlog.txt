@@ -1,0 +1,13 @@
+PRODUCTO BACKLOG
+
+1. Add, modify or delete Ingredient
+2. Add, modify or delete nutrient
+3. Add, modify or delete Nutritional Requirement sheet
+4. Calculate Minimum Cost Mixture
+5. Reports in different distributed ways.
+6. Ingredient Restrictions
+7. Nutrient Restrictions
+8. Cost Range Restrictions
+9. Easy to install
+10. Easy to use.
+11. Activation by phonecall.

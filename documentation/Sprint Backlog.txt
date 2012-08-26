@@ -1,0 +1,12 @@
+SPRINT BACKLOG
+
+
+SPRINT 1:
+
+Estimated Time: 1w 3d
+Start Date: 8/08/2012
+End Date: 19/08/2012
+
+Producto Backlog aplies:
+	- Add, modify or delete ingredient
+	- Add, modify or delete nutrient
