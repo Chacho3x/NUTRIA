@@ -1,0 +1,24 @@
+DEV TOOLS
+
+SO: Windows
+Project extra docs: Google Drive
+IDE: NetBeans 7.2
+Version Control System: Git 1.7.12
+Version Control Server: GitHub 
+Version Control GUI: Smart Guit 3
+UML design tool: Enterprise Architect 7.5
+Mockup Design tool: Balsamiq Mockups 2.1.19
+DB Manager: SQLite Maestro 12.1
+
+
+
+STANDARS
+
+All English
+Java code convention http://www.oracle.com/technetwork/java/codeconv-138413.html 
+
+
+DEV PROCESS
+
+Scrum
+Daily meeting: Monday, Wednesday | thursday, saturday | sunday
