@@ -1,17 +1,29 @@
-package nutriaapp;
+package nutriamodel;
 /**
- *
  * @author Ariel
  */
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity(name = "ingredient")
 public class Ingredient implements Serializable {
+    
+    @Id
+    @GeneratedValue
     private Long id;
+    
+    @Column
     private String name;
+    @Column
     private Double price;
+    @Column(name = "rounding_factor")
     private Double roundingFactor;
+    
     private List<Nutrient> nutrients;
 
     public Long getId() {

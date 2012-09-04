@@ -1,4 +1,4 @@
-package nutriaapp;
+package nutriamodel;
 
 /**
  *
@@ -7,12 +7,24 @@ package nutriaapp;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
 public class Nutrient implements Serializable {
+    @Id
+    @GeneratedValue
     private Long id;
+    
+    @Column
     private String name;
+    
+    @Column
     private String unit;
-
+    
+    
     public Long getId() {
         return id;
     }
