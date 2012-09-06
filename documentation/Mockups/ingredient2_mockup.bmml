@@ -1,6 +1,6 @@
-<mockup version="1.0" skin="sketch" measuredW="803" measuredH="378" mockupW="738" mockupH="350">
+<mockup version="1.0" skin="sketch" measuredW="803" measuredH="465" mockupW="738" mockupH="437">
   <controls>
-    <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="65" y="28" w="273" h="350" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="65" y="28" w="306" h="350" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
       <controlProperties>
         <bottomheight>0</bottomheight>
         <close>true</close>
@@ -9,7 +9,7 @@
         <topheight>26</topheight>
       </controlProperties>
     </control>
-    <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="154" y="69" w="168" h="-1" measuredW="79" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="154" y="69" w="191" h="-1" measuredW="79" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
       <controlProperties>
         <text/>
       </controlProperties>
@@ -19,7 +19,7 @@
         <text>Nombre%3A</text>
       </controlProperties>
     </control>
-    <control controlID="4" controlTypeID="com.balsamiq.mockups::DataGrid" x="80" y="185" w="243" h="143" measuredW="220" measuredH="144" zOrder="3" locked="false" isInGroup="-1">
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::DataGrid" x="80" y="185" w="265" h="143" measuredW="285" measuredH="144" zOrder="3" locked="false" isInGroup="-1">
       <controlProperties>
         <borderStyle>square</borderStyle>
         <hasHeader>true</hasHeader>
@@ -27,7 +27,7 @@
         <rowHeight>24</rowHeight>
         <selectedIndex>-1</selectedIndex>
         <size>12</size>
-        <text>Nombre%20%5E%2C%20Unidad%20%5Ev%2C%20Accion%0ACalcio%2C%20mg%2C%20%5BQuitar%5D%0AProteina%2C%20%25%2C%20%5BQuitar%5D%0ACarbohidratos%2C%20mg%2C%20%5BQuitar%5D%0AVitamina%20A%2C%20mg%2C%20%5BQuitar%5D%0AF%F3sforo%2C%20%25%2C%20%5BQuitar%5D%0A%7B80L%2C%2050L%2C%2030L%7D</text>
+        <text>Nombre%20%5E%2C%20Unidad%20%5Ev%2C%20Cantidad%2C%20Accion%0ACalcio%2C%20mg%2C%200.9%2C%20%5BQuitar%5D%0AProteina%2C%20%25%2C%2080%2C%20%5BQuitar%5D%0ACarbohidratos%2C%20mg%2C%200.02%2C%20%5BQuitar%5D%0AVitamina%20A%2C%20mg%2C%200.1%2C%20%5BQuitar%5D%0AF%F3sforo%2C%20%25%2C%2010%2C%20%5BQuitar%5D%0A%7B80L%2C%2050L%2C%2030L%7D</text>
         <value>0</value>
         <verticalScrollbar>true</verticalScrollbar>
         <vLines>true</vLines>
@@ -43,7 +43,7 @@
         <text>Precio%20%28%24/Kg%29%3A</text>
       </controlProperties>
     </control>
-    <control controlID="7" controlTypeID="com.balsamiq.mockups::TextInput" x="243" y="96" w="-1" h="-1" measuredW="79" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::TextInput" x="243" y="96" w="102" h="-1" measuredW="79" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
       <controlProperties>
         <text/>
       </controlProperties>
@@ -76,7 +76,7 @@
         <text>Agregar</text>
       </controlProperties>
     </control>
-    <control controlID="12" controlTypeID="com.balsamiq.mockups::Button" x="196" y="158" w="-1" h="-1" measuredW="127" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Button" x="218" y="155" w="-1" h="-1" measuredW="127" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Agregar%20Nutriente</text>
       </controlProperties>
@@ -86,7 +86,7 @@
         <text>No%20encuentras%20el%20nutriente%3F%20Agrega%20uno%20nuevo%20%5Baqu%ED%5D.</text>
       </controlProperties>
     </control>
-    <control controlID="14" controlTypeID="com.balsamiq.mockups::Arrow" x="323" y="69" w="207" h="74" measuredW="150" measuredH="100" zOrder="13" locked="false" isInGroup="-1">
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Arrow" x="345" y="69" w="185" h="101" measuredW="150" measuredH="100" zOrder="13" locked="false" isInGroup="-1">
       <controlProperties>
         <curvature>-1</curvature>
         <direction>bottom</direction>
@@ -108,9 +108,14 @@
         <text>Factor%20de%20redondeo</text>
       </controlProperties>
     </control>
-    <control controlID="18" controlTypeID="com.balsamiq.mockups::TextInput" x="243" y="127" w="-1" h="-1" measuredW="79" measuredH="27" zOrder="17" locked="false" isInGroup="-1">
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::TextInput" x="243" y="127" w="102" h="-1" measuredW="79" measuredH="27" zOrder="17" locked="false" isInGroup="-1">
       <controlProperties>
         <text/>
+      </controlProperties>
+    </control>
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::HCurly" x="65" y="385" w="306" h="80" measuredW="200" measuredH="80" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Solo%20la%20columna%20cantidad%20es%20editable.%20Inicialmente%20la%20cantidad%20default%20sera%20de%200.0</text>
       </controlProperties>
     </control>
   </controls>
