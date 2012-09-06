@@ -1,0 +1,64 @@
+<mockup version="1.0" skin="sketch" measuredW="703" measuredH="426" mockupW="450" mockupH="400">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="253" y="26" w="-1" h="-1" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bottomheight>0</bottomheight>
+        <close>true</close>
+        <maximizeRestore>false</maximizeRestore>
+        <minimize>true</minimize>
+        <text>Ingredientes</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::ButtonBar" x="253" y="48" w="443" h="59" measuredW="361" measuredH="29" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>2</selectedIndex>
+        <text>Inicio%2C%20Nutrientes%2C%20Ingredientes%2C%20Mezclas%2C%20...</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::DataGrid" x="268" y="116" w="199" h="189" measuredW="216" measuredH="144" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hLines>false</hLines>
+        <selectedIndex>0</selectedIndex>
+        <size>12</size>
+        <text>Nombre%20%5E%2C%20Precio%20%28%24/Kg%29%5Ev%0AHarina%20de%20Carne%2C%2020%0ACebada%20en%20paja%2C%2030%0AHarina%20de%20Maiz%2C%2020%0A%20%0A%7B80L%2C%200R%7D</text>
+        <value>0</value>
+        <verticalScrollbar>true</verticalScrollbar>
+        <vLines>true</vLines>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::FieldSet" x="475" y="109" w="213" h="196" measuredW="200" measuredH="170" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Informaci%F3n</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::List" x="489" y="146" w="191" h="126" measuredW="100" measuredH="128" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Precio%28%24/Kg%29%3A%09%09%20%200.15%0AFactor%20de%20redondeo%3A%200.01%0AMat.%20Seca%28%25%29%3A%09%0989.00%0AProteina%28%25%29%3A%09%0910.00%0AFibra%28%25%29%3A%09%09%09%202.7%0ACalcio%28%25%29%3A%09%09%200.02</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Label" x="489" y="125" w="-1" h="-1" measuredW="89" measuredH="21" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Harina%20de%20Maiz</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="658" y="154" w="-1" h="111" measuredW="16" measuredH="100" zOrder="6" locked="false" isInGroup="-1"/>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::MultilineButton" x="268" y="333" w="84" h="61" measuredW="97" measuredH="68" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>PlusIcon%7Cxsmall</icon>
+        <size>16</size>
+        <text>Nuevo%20%0ANutriente</text>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::MultilineButton" x="361" y="333" w="95" h="61" measuredW="120" measuredH="69" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>DocPDFIcon%7Csmall</icon>
+        <text>Exportar%20%0ALista</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::Button" x="544" y="272" w="-1" h="-1" measuredW="75" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Modificar</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
