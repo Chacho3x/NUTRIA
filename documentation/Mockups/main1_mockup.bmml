@@ -1,0 +1,30 @@
+<mockup version="1.0" skin="sketch" measuredW="683" measuredH="431" mockupW="450" mockupH="400">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="233" y="31" w="450" h="400" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bottomheight>0</bottomheight>
+        <close>true</close>
+        <maximizeRestore>true</maximizeRestore>
+        <minimize>true</minimize>
+        <text>NUTRIA%20-%20Administrar%20Nutrientes</text>
+        <topheight>26</topheight>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::ButtonBar" x="233" y="53" w="443" h="59" measuredW="361" measuredH="29" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>0</selectedIndex>
+        <text>Inicio%2C%20Nutrientes%2C%20Ingredientes%2C%20Mezclas%2C%20...</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Paragraph" x="255" y="135" w="401" h="266" measuredW="200" measuredH="80" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>A%20long%20description%20about%20the%20section%20the%20mouse%20is%20over.%0AIt%20must%20contain%20an%20image%20too%20so%20the%20%0AA%20_second_%20%5Brow%5D%20of%20*text*.</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Image" x="368" y="193" w="282" h="183" measuredW="77" measuredH="79" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
