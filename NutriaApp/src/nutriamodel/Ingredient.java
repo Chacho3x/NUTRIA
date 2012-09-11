@@ -2,30 +2,37 @@ package nutriamodel;
 /**
  * @author Ariel
  */
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
-@Entity(name = "ingredient")
+@DatabaseTable
 public class Ingredient implements Serializable {
     
-    @Id
-    @GeneratedValue
+    @DatabaseField(generatedId = true)
     private Long id;
     
-    @Column
+    @DatabaseField
     private String name;
-    @Column
+    
+    @DatabaseField
     private Double price;
-    @Column(name = "rounding_factor")
+    
+    @DatabaseField(columnName = "rounding_factor")
     private Double roundingFactor;
     
     private List<Nutrient> nutrients;
-
+    
+    public Ingredient() {}
+    
+    public Ingredient(String name, Double price, Double roundingFactor) {
+        this.name = name;
+        this.price = price;
+        this.roundingFactor = roundingFactor;
+    }
+    
     public Long getId() {
         return id;
     }

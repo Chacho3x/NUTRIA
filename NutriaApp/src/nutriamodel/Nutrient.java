@@ -5,25 +5,29 @@ package nutriamodel;
  * @author Ariel
  */
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
-@Entity
+@DatabaseTable
 public class Nutrient implements Serializable {
-    @Id
-    @GeneratedValue
+    
+    @DatabaseField(generatedId = true)
     private Long id;
     
-    @Column
+    @DatabaseField
     private String name;
     
-    @Column
+    @DatabaseField
     private String unit;
     
+    public Nutrient() {}
+    
+    public Nutrient(String name, String unit) {
+        this.name = name;
+        this.unit = unit;
+    }
     
     public Long getId() {
         return id;

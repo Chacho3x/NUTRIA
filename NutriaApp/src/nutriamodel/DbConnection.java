@@ -2,18 +2,23 @@ package nutriamodel;
 
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
+import java.io.FileInputStream;
+import java.util.Properties;
 
 /**
  *
  * @author Ariel
  */
 public class DbConnection {
-    private String connect_string = "jdbc:sqlite://D:/dev/databases/nutriadb.db3" ;
+    
     private ConnectionSource conn;
+    
     public DbConnection() {
         try {
+            Properties prop = new Properties();
+            prop.load(new FileInputStream("config.properties"));
             Class.forName("org.sqlite.JDBC");
-            conn = new JdbcConnectionSource(connect_string);
+            conn = new JdbcConnectionSource(prop.getProperty("db.string"));
         }
         catch (Exception e) {
                 e.printStackTrace();
