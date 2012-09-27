@@ -19,6 +19,7 @@
             <explicit-platform explicit-source-supported="true"/>
             <source-roots>
                 <root id="src.dir"/>
+                <root id="src.resources.dir" name="Resources Packages"/>
             </source-roots>
             <test-roots>
                 <root id="test.test.dir" name="Test Packages"/>

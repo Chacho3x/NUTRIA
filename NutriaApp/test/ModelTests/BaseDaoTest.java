@@ -2,7 +2,7 @@ package ModelTests;
 
 import java.io.FileInputStream;
 import java.util.Properties;
-import nutriamodel.ModelHelper;
+import NutriaModel.ModelHelper;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

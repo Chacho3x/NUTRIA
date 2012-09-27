@@ -3,10 +3,10 @@ package ModelTests;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import nutriamodel.Ingredient;
-import nutriamodel.IngredientDaoImpl;
-import nutriamodel.Nutrient;
-import nutriamodel.NutrientDaoImpl;
+import NutriaModel.Ingredient;
+import NutriaModel.IngredientDaoImpl;
+import NutriaModel.Nutrient;
+import NutriaModel.NutrientDaoImpl;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
