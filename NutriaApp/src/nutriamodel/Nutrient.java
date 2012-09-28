@@ -1,4 +1,4 @@
-package nutriamodel;
+package NutriaModel;
 
 /**
  *

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package nutriaapp;
+package NutriaApp;
 
 import com.j256.ormlite.table.TableUtils;
 import java.sql.SQLException;
@@ -13,11 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import nutriamodel.DbConnection;
-import nutriamodel.Ingredient;
-import nutriamodel.Nutrient;
-import nutriamodel.NutrientDao;
-import nutriamodel.NutrientDaoImpl;
+import NutriaModel.DbConnection;
+import NutriaModel.Ingredient;
+import NutriaModel.Nutrient;
+import NutriaModel.NutrientDao;
+import NutriaModel.NutrientDaoImpl;
 
 /**
  *

@@ -1,4 +1,4 @@
-package nutriamodel;
+package NutriaModel;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;

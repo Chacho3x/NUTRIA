@@ -1,13 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package NutriaModel;
 
 import NutriaLib.LinkLabel;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
+import NutriaModel.Nutrient;
 
 /**
  *

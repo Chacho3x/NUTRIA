@@ -1,4 +1,4 @@
-package nutriamodel;
+package NutriaModel;
 
 import com.j256.ormlite.table.TableUtils;
 import java.sql.SQLException;

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package nutriamodel;
+package NutriaModel;
 
 import com.j256.ormlite.dao.Dao;
 /**

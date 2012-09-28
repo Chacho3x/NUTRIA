@@ -1,4 +1,4 @@
-package nutriamodel;
+package NutriaModel;
 
 import com.j256.ormlite.dao.BaseDaoImpl;
 import com.j256.ormlite.dao.Dao;

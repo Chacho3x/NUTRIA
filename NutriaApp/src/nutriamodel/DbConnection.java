@@ -1,4 +1,4 @@
-package nutriamodel;
+package NutriaModel;
 
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
