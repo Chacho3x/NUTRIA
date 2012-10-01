@@ -1,14 +1,11 @@
 package ModelTests;
 
-import java.io.FileInputStream;
-import java.util.Properties;
 import NutriaModel.ModelHelper;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -35,5 +32,9 @@ public class BaseDaoTest {
     
     @After
     public void tearDown() {
+    }
+    
+    @Test
+    public void mainTest() {
     }
 }

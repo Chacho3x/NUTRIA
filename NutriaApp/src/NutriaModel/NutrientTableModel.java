@@ -1,9 +1,10 @@
 package NutriaModel;
 
 import NutriaLib.LinkLabel;
+import java.sql.SQLException;
 import java.util.List;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
-import NutriaModel.Nutrient;
 
 /**
  *
@@ -13,10 +14,20 @@ public class NutrientTableModel extends AbstractTableModel {
     private String[] columnNames = new String[] {"id", "Nombre", "Unidad", "Acciones"};
     private List<Nutrient> nutrientList;
     private Object[] actions;
+    private NutrientDaoImpl nutrientDao;
     
-    public NutrientTableModel(List<Nutrient> nutrientList) {
-        this.nutrientList = nutrientList;
-        this.actions = new Object[nutrientList.size()];
+    public NutrientTableModel() {
+        initNutrientTableModel();
+    }
+    
+    private void initNutrientTableModel() {
+        try {
+            nutrientDao = new NutrientDaoImpl();
+            this.nutrientList = nutrientDao.queryForAll();
+            this.actions = new Object[nutrientList.size()];
+        } catch(SQLException ex) {
+            //TODO: handle init NutrientTableModel
+        }
     }
     
     public int getRowCount() {
@@ -43,7 +54,13 @@ public class NutrientTableModel extends AbstractTableModel {
             actions[rowIndex] = (LinkLabel)aValue;
         }
     }
-
+    
+    @Override
+    public void fireTableDataChanged() {
+        initNutrientTableModel();
+        fireTableChanged(new TableModelEvent(this));
+    }
+    
     @Override
     public String getColumnName(int column) {
         return this.columnNames[column];
