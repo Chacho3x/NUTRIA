@@ -31,7 +31,7 @@
         <text>Informaci%F3n</text>
       </controlProperties>
     </control>
-    <control controlID="11" controlTypeID="com.balsamiq.mockups::List" x="489" y="146" w="191" h="126" measuredW="100" measuredH="128" zOrder="4" locked="false" isInGroup="-1">
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::List" x="489" y="146" w="191" h="145" measuredW="100" measuredH="128" zOrder="4" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Precio%28%24/Kg%29%3A%09%09%20%200.15%0AFactor%20de%20redondeo%3A%200.01%0AMat.%20Seca%28%25%29%3A%09%0989.00%0AProteina%28%25%29%3A%09%0910.00%0AFibra%28%25%29%3A%09%09%09%202.7%0ACalcio%28%25%29%3A%09%09%200.02</text>
       </controlProperties>
@@ -41,23 +41,28 @@
         <text>Harina%20de%20Maiz</text>
       </controlProperties>
     </control>
-    <control controlID="13" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="658" y="154" w="-1" h="111" measuredW="16" measuredH="100" zOrder="6" locked="false" isInGroup="-1"/>
-    <control controlID="14" controlTypeID="com.balsamiq.mockups::MultilineButton" x="268" y="333" w="84" h="61" measuredW="97" measuredH="68" zOrder="7" locked="false" isInGroup="-1">
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="658" y="154" w="-1" h="119" measuredW="16" measuredH="100" zOrder="6" locked="false" isInGroup="-1"/>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::MultilineButton" x="268" y="333" w="84" h="61" measuredW="108" measuredH="68" zOrder="7" locked="false" isInGroup="-1">
       <controlProperties>
         <icon>PlusIcon%7Cxsmall</icon>
         <size>16</size>
-        <text>Nuevo%20%0ANutriente</text>
+        <text>Nuevo%20%0AIngredientes</text>
       </controlProperties>
     </control>
-    <control controlID="15" controlTypeID="com.balsamiq.mockups::MultilineButton" x="361" y="333" w="95" h="61" measuredW="120" measuredH="69" zOrder="8" locked="false" isInGroup="-1">
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::MultilineButton" x="593" y="333" w="95" h="61" measuredW="120" measuredH="69" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
         <icon>DocPDFIcon%7Csmall</icon>
         <text>Exportar%20%0ALista</text>
       </controlProperties>
     </control>
-    <control controlID="16" controlTypeID="com.balsamiq.mockups::Button" x="544" y="272" w="-1" h="-1" measuredW="75" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::MultilineButton" x="358" y="333" w="89" h="61" measuredW="95" measuredH="69" zOrder="9" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Modificar</text>
+        <text>Modificar%0ANutriente</text>
+      </controlProperties>
+    </control>
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::MultilineButton" x="455" y="333" w="89" h="61" measuredW="89" measuredH="69" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Eliminar%0AIngrediente</text>
       </controlProperties>
     </control>
   </controls>
