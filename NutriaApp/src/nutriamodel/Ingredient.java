@@ -23,7 +23,7 @@ public class Ingredient implements Serializable {
     @DatabaseField(columnName = "rounding_factor")
     private Double roundingFactor;
     
-    private List<Nutrient> nutrients;
+    private List<NutrientIngredient> nutrients;
     
     public Ingredient() {}
     
@@ -65,11 +65,11 @@ public class Ingredient implements Serializable {
         this.roundingFactor = roundingFactor;
     }
 
-    public List<Nutrient> getNutrients() {
+    public List<NutrientIngredient> getNutrients() {
         return nutrients;
     }
 
-    public void setNutrients(List<Nutrient> nutrients) {
+    public void setNutrients(List<NutrientIngredient> nutrients) {
         this.nutrients = nutrients;
     }
 

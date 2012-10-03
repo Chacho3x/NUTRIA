@@ -1,12 +1,13 @@
 package ModelTests;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import NutriaModel.Ingredient;
 import NutriaModel.IngredientDaoImpl;
 import NutriaModel.Nutrient;
 import NutriaModel.NutrientDaoImpl;
+import NutriaModel.NutrientIngredient;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -62,29 +63,45 @@ public class IngredientDaoTest extends BaseDaoTest {
     @Test
     public void getAddNutrientsTest() throws Exception {
         List<Nutrient> nutrientList = new ArrayList();
+        //first create list of nutrients
         for(int i = 0; i < 5; i++) {
             nutrientList.add(new Nutrient("Nutrient " + i, "%"));
             nutrientDao.create(nutrientList.get(i));
         }
+        
+        //add nutrients to ingredient
         Ingredient ingredient1 = new Ingredient("Sorgo", 10D, 0.1D);
-        ingredient1.setNutrients(nutrientList);
+        List<NutrientIngredient> nutrientIngredientList;
+        if(ingredient1.getNutrients() == null)
+            nutrientIngredientList = new ArrayList();
+        else
+            nutrientIngredientList = ingredient1.getNutrients();
+        
+        for(Nutrient n : nutrientList) {
+            nutrientIngredientList.add(new NutrientIngredient(n, 10D));
+        }
+        
+        ingredient1.setNutrients(nutrientIngredientList);
         ingredientDao.createOrUpdate(ingredient1);
+        
+        //test if saved
+        assertNotNull(ingredient1.getId());
         
         Ingredient resultIngredient = ingredientDao.queryForId(ingredient1.getId());
         assertNotNull(resultIngredient);
         
         //get saved nutrient list
         ingredientDao.populateNutrients(resultIngredient);
-        List<Nutrient> resultNutrientList = resultIngredient.getNutrients();
+        List<NutrientIngredient> resultNutrientList = resultIngredient.getNutrients();
         assertNotNull(resultNutrientList);
         assertEquals(5, resultNutrientList.size());
         
-        resultNutrientList.remove(nutrientList.get(2));
-        resultNutrientList.remove(nutrientList.get(4));
+        resultNutrientList.remove(2);
+        resultNutrientList.remove(2);
         
         Nutrient lastNutrient = new Nutrient("ultimo nutriente", "%");
         nutrientDao.create(lastNutrient);
-        resultNutrientList.add(lastNutrient);
+        resultNutrientList.add(new NutrientIngredient(lastNutrient, 20D));
                 
         resultIngredient.setNutrients(resultNutrientList);
         ingredientDao.createOrUpdate(resultIngredient);
@@ -92,11 +109,11 @@ public class IngredientDaoTest extends BaseDaoTest {
         Ingredient resultIngredient2 = ingredientDao.queryForId(resultIngredient.getId());
         ingredientDao.populateNutrients(resultIngredient2);
         
-        List<Nutrient> resultNutrientList2 = resultIngredient2.getNutrients();
+        List<NutrientIngredient> resultNutrientList2 = resultIngredient2.getNutrients();
         assertNotNull(resultNutrientList2);
         assertEquals(4, resultNutrientList2.size());
-        assertEquals("ultimo nutriente", resultNutrientList2.get(3).getName());
-        assertFalse(resultNutrientList2.contains(nutrientList.get(2)));
-        assertFalse(resultNutrientList2.contains(nutrientList.get(4)));
+        assertEquals("ultimo nutriente", resultNutrientList2.get(3).getNutrient().getName());
+        assertFalse(resultNutrientList2.contains(nutrientIngredientList.get(2)));
+        assertFalse(resultNutrientList2.contains(nutrientIngredientList.get(4)));
     }
 }

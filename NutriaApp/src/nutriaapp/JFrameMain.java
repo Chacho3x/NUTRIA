@@ -1,9 +1,11 @@
 package NutriaApp;
 
+import NutriaModel.Ingredient;
 import NutriaModel.IngredientDaoImpl;
 import NutriaModel.IngredientTableModel;
 import NutriaModel.NutrientDaoImpl;
 import NutriaModel.NutrientTableModel;
+import NutriaModel.NutrientsByIngredientTableModel;
 import java.sql.SQLException;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -20,7 +22,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private NutrientDaoImpl nutrientDao;
     private IngredientDaoImpl ingredientDao;
     private NutrientTableModel nutrientTableModel;
-    private NutrientTableModel nutrientsByIngredientTableModel;
+    private NutrientsByIngredientTableModel nutrientsByIngredientTableModel;
     private IngredientTableModel ingredientTableModel;
     
     public JFrameMain() throws SQLException {
@@ -50,7 +52,7 @@ public class JFrameMain extends javax.swing.JFrame {
             ingredientTableModel.setIngredientList(ingredientDao.queryForAll());
             jTableIngredients.setModel(ingredientTableModel);
             jTableIngredients.removeColumn(jTableIngredients.getColumn("id"));
-            nutrientsByIngredientTableModel = new NutrientTableModel();
+            nutrientsByIngredientTableModel = new NutrientsByIngredientTableModel();
             jTableIngredientDetails.setModel(nutrientsByIngredientTableModel);
             jTableIngredientDetails.removeColumn(jTableIngredientDetails.getColumn("id"));
             jLabelIngredientName.setVisible(false);
@@ -347,7 +349,21 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDeleteNutrientActionPerformed
 
     private void jButtonNewIngredientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewIngredientActionPerformed
-        // TODO add your handling code here:
+        JDialog formDialog = new JDialog(this, "Nuevo Ingredient", true);
+        JPanelIngredientForm ingredientForm = new JPanelIngredientForm();
+        formDialog.setContentPane(ingredientForm);
+        formDialog.setSize(500, 500);
+        formDialog.setResizable(false);
+        formDialog.setVisible(true);
+//        if (ingredientForm.getSuccess()) {
+//            System.out.println("Successfully saved");
+//            try {
+//                nutrientTableModel.setNutrientList(nutrientDao.queryForAll());
+//                nutrientTableModel.fireTableDataChanged();
+//            } catch(SQLException ex) {
+//                //TODO: handle refresh table data
+//            }
+//        }
     }//GEN-LAST:event_jButtonNewIngredientActionPerformed
 
     private void jButtonEditIngredientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditIngredientActionPerformed
@@ -361,13 +377,16 @@ public class JFrameMain extends javax.swing.JFrame {
     private void jTableIngredientsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableIngredientsMouseClicked
         Long ingredientId = (Long)ingredientTableModel.getValueAt(jTableIngredients.getSelectedRow(), 0);
         loadNutrientsByIngredient(ingredientId);
-        jLabelIngredientName.setVisible(true);
         jLabelIngredientName.setText(ingredientTableModel.getValueAt(jTableIngredients.getSelectedRow(), 1).toString());
+        jLabelIngredientName.setVisible(true);
     }//GEN-LAST:event_jTableIngredientsMouseClicked
     
     private void loadNutrientsByIngredient(Long ingredientId) {
         try {
-            nutrientsByIngredientTableModel.setNutrientList(nutrientDao.getByIngredientId(ingredientId));
+            Ingredient ingredient = new Ingredient();
+            ingredient.setId(ingredientId);
+            ingredient = ingredientDao.populateNutrients(ingredient);
+            nutrientsByIngredientTableModel.setNutrientList(ingredient.getNutrients());
             nutrientsByIngredientTableModel.fireTableDataChanged();
         } catch(SQLException ex) {
             //TODO: handle load nutrients
