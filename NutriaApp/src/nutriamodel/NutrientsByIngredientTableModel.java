@@ -40,6 +40,26 @@ public class NutrientsByIngredientTableModel extends AbstractTableModel {
         return columnNames.length;
     }
     
+    public Class getColumnClass(int columnIndex) {
+        return getValueAt(0, columnIndex).getClass();
+    }
+    
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        if(columnIndex == 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public void setValueAt(Object value, int rowIndex, int columnIndex) {
+        if (columnIndex == 2) {
+            NutrientIngredient nutrient = nutrientList.get(rowIndex);
+            nutrient.setNutrientQuantity((Double)value);
+            fireTableCellUpdated(rowIndex, columnIndex);
+        }
+    }
+    
     public Object getValueAt(int rowIndex, int columnIndex) {
         NutrientIngredient nutrient = nutrientList.get(rowIndex);
         Object[] values = new Object[] {
