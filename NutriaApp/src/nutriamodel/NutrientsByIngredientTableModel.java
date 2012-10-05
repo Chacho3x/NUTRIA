@@ -28,7 +28,7 @@ public class NutrientsByIngredientTableModel extends AbstractTableModel {
         this.nutrientList = nutrientList;
     }
     
-    public List<NutrientIngredient> geNutrientList() {
+    public List<NutrientIngredient> getNutrientList() {
         return nutrientList;
     }
     
@@ -48,6 +48,10 @@ public class NutrientsByIngredientTableModel extends AbstractTableModel {
             nutrient.getNutrientQuantity()
         };
         return values[columnIndex];
+    }
+    
+    public Object getObjectAtRow(int rowIndex) {
+        return nutrientList.get(rowIndex);
     }
     
     @Override

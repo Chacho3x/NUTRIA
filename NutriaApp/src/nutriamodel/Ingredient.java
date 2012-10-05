@@ -5,6 +5,7 @@ package NutriaModel;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,7 +24,7 @@ public class Ingredient implements Serializable {
     @DatabaseField(columnName = "rounding_factor")
     private Double roundingFactor;
     
-    private List<NutrientIngredient> nutrients;
+    private List<NutrientIngredient> nutrients = new ArrayList<>();
     
     public Ingredient() {}
     

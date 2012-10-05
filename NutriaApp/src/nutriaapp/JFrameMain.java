@@ -350,24 +350,44 @@ public class JFrameMain extends javax.swing.JFrame {
 
     private void jButtonNewIngredientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewIngredientActionPerformed
         JDialog formDialog = new JDialog(this, "Nuevo Ingredient", true);
-        JPanelIngredientForm ingredientForm = new JPanelIngredientForm();
+        JPanelIngredientForm ingredientForm = new JPanelIngredientForm(formDialog);
         formDialog.setContentPane(ingredientForm);
         formDialog.setSize(500, 500);
         formDialog.setResizable(false);
         formDialog.setVisible(true);
-//        if (ingredientForm.getSuccess()) {
-//            System.out.println("Successfully saved");
-//            try {
-//                nutrientTableModel.setNutrientList(nutrientDao.queryForAll());
-//                nutrientTableModel.fireTableDataChanged();
-//            } catch(SQLException ex) {
-//                //TODO: handle refresh table data
-//            }
-//        }
+        if (ingredientForm.getSuccess()) {
+            System.out.println("Successfully saved");
+            try {
+                ingredientTableModel.setIngredientList(ingredientDao.queryForAll());
+                ingredientTableModel.fireTableDataChanged();
+                nutrientsByIngredientTableModel.getNutrientList().clear();
+                jLabelIngredientName.setVisible(false);
+            } catch(SQLException ex) {
+                //TODO: handle refresh table data
+            }
+        }
     }//GEN-LAST:event_jButtonNewIngredientActionPerformed
 
     private void jButtonEditIngredientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditIngredientActionPerformed
-        // TODO add your handling code here:
+        int selectedIndex = jTableIngredients.getSelectedRow();
+        Long id = (Long)jTableIngredients.getModel().getValueAt(selectedIndex, 0);
+        JDialog formDialog = new JDialog(this, "Modificar Ingredient", true);
+        JPanelIngredientForm ingredientForm = new JPanelIngredientForm(formDialog, id);
+        formDialog.setContentPane(ingredientForm);
+        formDialog.setSize(500, 500);
+        formDialog.setResizable(false);
+        formDialog.setVisible(true);
+        if (ingredientForm.getSuccess()) {
+            System.out.println("Successfully saved");
+            try {
+                ingredientTableModel.setIngredientList(ingredientDao.queryForAll());
+                ingredientTableModel.fireTableDataChanged();
+                nutrientsByIngredientTableModel.getNutrientList().clear();
+                jLabelIngredientName.setVisible(false);
+            } catch(SQLException ex) {
+                //TODO: handle refresh table data
+            }
+        }
     }//GEN-LAST:event_jButtonEditIngredientActionPerformed
 
     private void jButtonDeleteIngredientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteIngredientActionPerformed

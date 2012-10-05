@@ -46,6 +46,10 @@ public class NutrientTableModel extends AbstractTableModel {
         //TODO: implement setValueAt
     }
     
+    public Object getObjectAtRow(int rowIndex) {
+        return nutrientList.get(rowIndex);
+    }
+    
     @Override
     public String getColumnName(int column) {
         return this.columnNames[column];
