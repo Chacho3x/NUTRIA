@@ -15,13 +15,13 @@ import org.junit.Test;
  *
  * @author Ariel
  */
-public class NutrientIngredientTest extends BaseDaoTest {
+public class NutrientIngredientDaoTest extends BaseDaoTest {
     
     private NutrientIngredientDaoImpl nutrientIngredientDao;
     private NutrientDaoImpl nutrientDao;
     private IngredientDaoImpl ingredientDao;
     
-    public NutrientIngredientTest () throws SQLException {
+    public NutrientIngredientDaoTest () throws SQLException {
         nutrientIngredientDao = new NutrientIngredientDaoImpl();
         nutrientDao = new NutrientDaoImpl();
         ingredientDao = new IngredientDaoImpl();

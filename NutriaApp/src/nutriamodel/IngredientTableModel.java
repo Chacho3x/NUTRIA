@@ -45,7 +45,11 @@ public class IngredientTableModel extends AbstractTableModel {
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         //TODO: implement this method.
     }
-
+    
+    public Object getObjectAtRow(int rowIndex) {
+        return this.ingredientList.get(rowIndex);
+    }
+    
     @Override
     public String getColumnName(int column) {
         return this.columnNames[column];

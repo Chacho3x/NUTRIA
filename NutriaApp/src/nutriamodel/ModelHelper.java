@@ -17,6 +17,8 @@ public abstract class ModelHelper  {
         classList.add(new Nutrient());
         classList.add(new Ingredient());
         classList.add(new NutrientIngredient());
+        classList.add(new NutrientConstraint());
+        classList.add(new NutritionalSheet());
         return classList;
     }
     

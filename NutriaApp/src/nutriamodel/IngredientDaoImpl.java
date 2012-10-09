@@ -20,7 +20,8 @@ implements IngredientDao {
         List<NutrientIngredient> nutrientIngredientList = nutrientIngredientDao.getByIngredientId(ingredient.getId());
         
         for(NutrientIngredient aux : nutrientIngredientList) {
-            aux.setNutrient(nutrientDao.queryForId(aux.getId()));
+            Nutrient n = nutrientDao.queryForId(aux.getNutrient().getId());
+            aux.setNutrient(n);
         }
         ingredient.setNutrients(nutrientIngredientList);
         return ingredient;
@@ -36,7 +37,7 @@ implements IngredientDao {
             List<NutrientIngredient> lastNutrientList = nutrientIngredientDao.getByIngredientId(ingredient.getId());
             
             //delete nutrients removed
-            for(NutrientIngredient lastNutrient : lastNutrientList) { 
+            for(NutrientIngredient lastNutrient : lastNutrientList) {
                 Boolean delete = true;
                 for(NutrientIngredient newNutrient : modifiedNutrientList) {
                     if(lastNutrient.getNutrient().getId().equals(newNutrient.getNutrient().getId())) {
@@ -61,5 +62,22 @@ implements IngredientDao {
             ingredient = populateNutrients(ingredient);
         }
         return resultStatus;
+    }
+    
+    @Override
+    public int deleteById(Long ingredientId) throws SQLException {
+        List<NutrientIngredient> nutrientsToDelete = nutrientIngredientDao.getByIngredientId(ingredientId);
+        
+        int result = 0;
+        
+        for(NutrientIngredient nutrient : nutrientsToDelete) {
+            result += nutrientIngredientDao.deleteById(nutrient.getId());
+        }
+        if (result == nutrientsToDelete.size()) {
+            result = super.deleteById(ingredientId);
+        } else {
+            result = 0;
+        }
+        return result;
     }
 }

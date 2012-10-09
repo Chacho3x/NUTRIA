@@ -3,12 +3,17 @@ package NutriaApp;
 import NutriaModel.Ingredient;
 import NutriaModel.IngredientDaoImpl;
 import NutriaModel.IngredientTableModel;
+import NutriaModel.NutrientConstraintsByNutSheetCompactTableModel;
 import NutriaModel.NutrientDaoImpl;
 import NutriaModel.NutrientTableModel;
 import NutriaModel.NutrientsByIngredientTableModel;
+import NutriaModel.NutritionalSheet;
+import NutriaModel.NutritionalSheetDaoImpl;
+import NutriaModel.NutritionalSheetTableModel;
 import java.sql.SQLException;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -21,14 +26,19 @@ public class JFrameMain extends javax.swing.JFrame {
      */
     private NutrientDaoImpl nutrientDao;
     private IngredientDaoImpl ingredientDao;
+    private NutritionalSheetDaoImpl nutritionalSheetDao;
+    
     private NutrientTableModel nutrientTableModel;
     private NutrientsByIngredientTableModel nutrientsByIngredientTableModel;
     private IngredientTableModel ingredientTableModel;
+    private NutritionalSheetTableModel nutritionalSheetTableModel;
+    private NutrientConstraintsByNutSheetCompactTableModel constraintsByNutSheetTableModel;
     
     public JFrameMain() throws SQLException {
         initComponents();
         initNutrientFormComponents();
         initIngredientFormComponents();
+        initNutritionalSheetFormComponents();
     }
     
     private void initNutrientFormComponents() {
@@ -56,6 +66,26 @@ public class JFrameMain extends javax.swing.JFrame {
             jTableIngredientDetails.setModel(nutrientsByIngredientTableModel);
             jTableIngredientDetails.removeColumn(jTableIngredientDetails.getColumn("id"));
             jLabelIngredientName.setVisible(false);
+        } catch(SQLException ex) {
+            //TODO: handle
+            ex.printStackTrace();
+        }
+    }
+    
+    private void initNutritionalSheetFormComponents() {
+        try {
+            jTextAreaNutritionalSheetName.setText("");
+            nutritionalSheetDao = new NutritionalSheetDaoImpl();
+            nutritionalSheetTableModel = new NutritionalSheetTableModel();
+            nutritionalSheetTableModel.setNutritionalSheetList(nutritionalSheetDao.queryForAll());
+            jTableNutritionalSheets.setModel(nutritionalSheetTableModel);
+            jTableNutritionalSheets.removeColumn(jTableNutritionalSheets.getColumn("id"));
+            
+            constraintsByNutSheetTableModel = new NutrientConstraintsByNutSheetCompactTableModel();
+            jTableNutritionalConstraints.setModel(constraintsByNutSheetTableModel);
+            jTableNutritionalConstraints.removeColumn(jTableNutritionalConstraints.getColumn("id"));
+            jTableNutritionalConstraints.getColumn("Nutriente").setPreferredWidth(100);
+            
         } catch(SQLException ex) {
             //TODO: handle
             ex.printStackTrace();
@@ -90,6 +120,16 @@ public class JFrameMain extends javax.swing.JFrame {
         jButtonNewIngredient = new javax.swing.JButton();
         jButtonEditIngredient = new javax.swing.JButton();
         jButtonDeleteIngredient = new javax.swing.JButton();
+        jPanelNutritionalSheet = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableNutritionalSheets = new javax.swing.JTable();
+        jPanelNutritionalSheetDetail = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTableNutritionalConstraints = new javax.swing.JTable();
+        jTextAreaNutritionalSheetName = new javax.swing.JTextArea();
+        jButtonNewNutritionalSheet = new javax.swing.JButton();
+        jButtonEditNutritionalSheet = new javax.swing.JButton();
+        jButtonDeleteNutritionalSheet = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,11 +137,11 @@ public class JFrameMain extends javax.swing.JFrame {
         jPanelHome.setLayout(jPanelHomeLayout);
         jPanelHomeLayout.setHorizontalGroup(
             jPanelHomeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 527, Short.MAX_VALUE)
+            .add(0, 580, Short.MAX_VALUE)
         );
         jPanelHomeLayout.setVerticalGroup(
             jPanelHomeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 304, Short.MAX_VALUE)
+            .add(0, 364, Short.MAX_VALUE)
         );
 
         jTabbedPaneMain.addTab("<html>\n<body style=\"height: 50px;\">\nInicio\n</body>\n</html>", jPanelHome);
@@ -137,30 +177,41 @@ public class JFrameMain extends javax.swing.JFrame {
             jPanelNutrientsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanelNutrientsLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jPanelNutrientsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 339, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(jPanelNutrientsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jPanelNutrientsLayout.createSequentialGroup()
-                        .add(jButtonNewNutrient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(10, 10, 10)
-                        .add(jButtonEditNutrient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(jButtonDeleteNutrient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(35, 35, 35)
+                        .add(jPanelNutrientsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jButtonNewNutrient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jPanelNutrientsLayout.createSequentialGroup()
+                                .add(10, 10, 10)
+                                .add(jButtonEditNutrient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(jButtonExportNutrientList, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 375, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(142, Short.MAX_VALUE))
+                        .add(jButtonExportNutrientList, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(34, 34, 34))
+                    .add(jPanelNutrientsLayout.createSequentialGroup()
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(jButtonDeleteNutrient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(64, 64, 64))))
         );
         jPanelNutrientsLayout.setVerticalGroup(
             jPanelNutrientsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanelNutrientsLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 208, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jPanelNutrientsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jButtonDeleteNutrient, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                    .add(jButtonExportNutrientList, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                    .add(jButtonEditNutrient, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                    .add(jButtonNewNutrient, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE))
-                .addContainerGap())
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelNutrientsLayout.createSequentialGroup()
+                .add(jPanelNutrientsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPanelNutrientsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .add(jPanelNutrientsLayout.createSequentialGroup()
+                        .add(16, 16, 16)
+                        .add(jPanelNutrientsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jPanelNutrientsLayout.createSequentialGroup()
+                                .add(jButtonNewNutrient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jButtonEditNutrient, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
+                            .add(jButtonExportNutrientList))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(jButtonDeleteNutrient, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)))
+                .add(60, 60, 60))
         );
 
         jTabbedPaneMain.addTab("Nutrientes", jPanelNutrients);
@@ -188,7 +239,7 @@ public class JFrameMain extends javax.swing.JFrame {
                 .add(jPanelIngredientDetailLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jPanelIngredientDetailLayout.createSequentialGroup()
                         .add(jLabelIngredientName)
-                        .add(0, 144, Short.MAX_VALUE))
+                        .add(0, 173, Short.MAX_VALUE))
                     .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -197,7 +248,7 @@ public class JFrameMain extends javax.swing.JFrame {
             .add(jPanelIngredientDetailLayout.createSequentialGroup()
                 .add(jLabelIngredientName)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -226,22 +277,21 @@ public class JFrameMain extends javax.swing.JFrame {
         jPanelIngredients.setLayout(jPanelIngredientsLayout);
         jPanelIngredientsLayout.setHorizontalGroup(
             jPanelIngredientsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelIngredientsLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanelIngredientsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+            .add(jPanelIngredientsLayout.createSequentialGroup()
+                .add(jPanelIngredientsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jPanelIngredientsLayout.createSequentialGroup()
-                        .add(jButtonNewIngredient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(10, 10, 10)
-                        .add(jButtonEditIngredient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(jButtonDeleteIngredient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(0, 0, Short.MAX_VALUE))
-                    .add(jPanelIngredientsLayout.createSequentialGroup()
-                        .add(0, 0, Short.MAX_VALUE)
-                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 281, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 310, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(18, 18, 18)
-                        .add(jPanelIngredientDetail, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(93, 93, 93))))
+                        .add(jPanelIngredientDetail, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jPanelIngredientsLayout.createSequentialGroup()
+                        .add(44, 44, 44)
+                        .add(jButtonNewIngredient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(18, 18, 18)
+                        .add(jButtonEditIngredient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(18, 18, 18)
+                        .add(jButtonDeleteIngredient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelIngredientsLayout.setVerticalGroup(
             jPanelIngredientsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -250,27 +300,150 @@ public class JFrameMain extends javax.swing.JFrame {
                 .add(jPanelIngredientsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .add(jPanelIngredientDetail, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(55, 55, 55)
                 .add(jPanelIngredientsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jButtonDeleteIngredient, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                    .add(jButtonEditIngredient, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                    .add(jButtonNewIngredient, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE))
-                .add(22, 22, 22))
+                    .add(jButtonEditIngredient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jButtonDeleteIngredient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 69, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jButtonNewIngredient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jTabbedPaneMain.addTab("Ingredientes", jPanelIngredients);
+
+        jTableNutritionalSheets.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1"
+            }
+        ));
+        jTableNutritionalSheets.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableNutritionalSheetsMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jTableNutritionalSheets);
+
+        jPanelNutritionalSheetDetail.setBorder(javax.swing.BorderFactory.createTitledBorder("Hoja Nutricional"));
+
+        jTableNutritionalConstraints.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        jScrollPane5.setViewportView(jTableNutritionalConstraints);
+
+        jTextAreaNutritionalSheetName.setEditable(false);
+        jTextAreaNutritionalSheetName.setColumns(20);
+        jTextAreaNutritionalSheetName.setForeground(new java.awt.Color(64, 64, 64));
+        jTextAreaNutritionalSheetName.setRows(5);
+        jTextAreaNutritionalSheetName.setAutoscrolls(false);
+        jTextAreaNutritionalSheetName.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTextAreaNutritionalSheetName.setEnabled(false);
+        jTextAreaNutritionalSheetName.setOpaque(false);
+
+        org.jdesktop.layout.GroupLayout jPanelNutritionalSheetDetailLayout = new org.jdesktop.layout.GroupLayout(jPanelNutritionalSheetDetail);
+        jPanelNutritionalSheetDetail.setLayout(jPanelNutritionalSheetDetailLayout);
+        jPanelNutritionalSheetDetailLayout.setHorizontalGroup(
+            jPanelNutritionalSheetDetailLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanelNutritionalSheetDetailLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jScrollPane5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 212, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(jPanelNutritionalSheetDetailLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(jPanelNutritionalSheetDetailLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .add(jTextAreaNutritionalSheetName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        jPanelNutritionalSheetDetailLayout.setVerticalGroup(
+            jPanelNutritionalSheetDetailLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanelNutritionalSheetDetailLayout.createSequentialGroup()
+                .add(56, 56, 56)
+                .add(jScrollPane5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+            .add(jPanelNutritionalSheetDetailLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(jPanelNutritionalSheetDetailLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .add(jTextAreaNutritionalSheetName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 33, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(139, Short.MAX_VALUE)))
+        );
+
+        jButtonNewNutritionalSheet.setText("Nueva Lista Nutricional");
+        jButtonNewNutritionalSheet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNewNutritionalSheetActionPerformed(evt);
+            }
+        });
+
+        jButtonEditNutritionalSheet.setText("Modificar Lista Nutricional");
+        jButtonEditNutritionalSheet.setToolTipText("");
+        jButtonEditNutritionalSheet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditNutritionalSheetActionPerformed(evt);
+            }
+        });
+
+        jButtonDeleteNutritionalSheet.setText("Eliminar Lista Nutricional");
+        jButtonDeleteNutritionalSheet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteNutritionalSheetActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jPanelNutritionalSheetLayout = new org.jdesktop.layout.GroupLayout(jPanelNutritionalSheet);
+        jPanelNutritionalSheet.setLayout(jPanelNutritionalSheetLayout);
+        jPanelNutritionalSheetLayout.setHorizontalGroup(
+            jPanelNutritionalSheetLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanelNutritionalSheetLayout.createSequentialGroup()
+                .add(jPanelNutritionalSheetLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanelNutritionalSheetLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(jScrollPane4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 295, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(18, 18, 18)
+                        .add(jPanelNutritionalSheetDetail, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jPanelNutritionalSheetLayout.createSequentialGroup()
+                        .add(18, 18, 18)
+                        .add(jButtonNewNutritionalSheet)
+                        .add(18, 18, 18)
+                        .add(jButtonEditNutritionalSheet)
+                        .add(18, 18, 18)
+                        .add(jButtonDeleteNutritionalSheet)))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+        jPanelNutritionalSheetLayout.setVerticalGroup(
+            jPanelNutritionalSheetLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanelNutritionalSheetLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanelNutritionalSheetLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(jScrollPane4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                    .add(jPanelNutritionalSheetDetail, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(30, 30, 30)
+                .add(jPanelNutritionalSheetLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jButtonNewNutritionalSheet)
+                    .add(jButtonEditNutritionalSheet)
+                    .add(jButtonDeleteNutritionalSheet))
+                .addContainerGap(95, Short.MAX_VALUE))
+        );
+
+        jTabbedPaneMain.addTab("Listas Nutricionales", jPanelNutritionalSheet);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .add(jTabbedPaneMain, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 532, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 1, Short.MAX_VALUE))
+            .add(jTabbedPaneMain, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 585, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jTabbedPaneMain, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 380, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(jTabbedPaneMain, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 440, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         );
 
         jTabbedPaneMain.getAccessibleContext().setAccessibleName("tab1\n");
@@ -390,16 +563,143 @@ public class JFrameMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonEditIngredientActionPerformed
 
+    private void deleteIngredient() {
+        int selectedIndex = jTableIngredients.getSelectedRow();
+        Ingredient ingredient = (Ingredient)ingredientTableModel.getObjectAtRow(selectedIndex);
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "¿Seguro que desea eliminar el Ingredient: " + ingredient.getName() + "?",
+            "Eliminar Ingrediente",
+            JOptionPane.YES_NO_OPTION);
+        
+        if (JOptionPane.YES_OPTION == confirm) {
+            try {
+                int result = ingredientDao.deleteById(ingredient.getId());
+                if(result > 0) {
+                    System.out.println("Deleted successfully");
+                    ingredientTableModel.setIngredientList(ingredientDao.queryForAll());
+                    ingredientTableModel.fireTableDataChanged();
+                    nutrientsByIngredientTableModel.getNutrientList().clear();
+                    jLabelIngredientName.setVisible(false);
+                } else {
+                    //TODO: validate if no success delete
+                    System.out.println("Ingredient could not be deleted");
+                }
+            } catch(SQLException ex) {
+                //TODO: handle Delete nutrient exception
+                ex.printStackTrace();
+            }
+        } else {
+            //TODO: validate in case NO opntion selected in delete Nutrient
+            System.out.println("User cancel delete Ingredient");
+        }
+    }
+    
+    private void deleteNutritionalSheet() {
+        int selectedIndex = jTableNutritionalSheets.getSelectedRow();
+        NutritionalSheet nutritionalSheet = (NutritionalSheet)nutritionalSheetTableModel.getObjectAtRow(selectedIndex);
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "¿Seguro que desea eliminar la Tabla Nutricional: " + nutritionalSheet.getName() + "?",
+            "Eliminar Tabla Nutritional",
+            JOptionPane.YES_NO_OPTION);
+        
+        if (JOptionPane.YES_OPTION == confirm) {
+            try {
+                int result = nutritionalSheetDao.deleteById(nutritionalSheet.getId());
+                if(result > 0) {
+                    System.out.println("Deleted successfully");
+                    nutritionalSheetTableModel.setNutritionalSheetList(nutritionalSheetDao.queryForAll());
+                    nutritionalSheetTableModel.fireTableDataChanged();
+                    constraintsByNutSheetTableModel.getNutrientConstraintList().clear();
+                    jTextAreaNutritionalSheetName.setText("");
+                } else {
+                    //TODO: validate if no success delete
+                    System.out.println("Nutritional Sheet could not be deleted");
+                }
+            } catch(SQLException ex) {
+                //TODO: handle Delete nutrient exception
+                ex.printStackTrace();
+            }
+        } else {
+            //TODO: validate in case NO opntion selected in delete Nutrient
+            System.out.println("User cancel delete Nutritional Sheet");
+        }
+    }
+    
     private void jButtonDeleteIngredientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteIngredientActionPerformed
-        // TODO add your handling code here:
+        deleteIngredient();
     }//GEN-LAST:event_jButtonDeleteIngredientActionPerformed
 
     private void jTableIngredientsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableIngredientsMouseClicked
         Long ingredientId = (Long)ingredientTableModel.getValueAt(jTableIngredients.getSelectedRow(), 0);
         loadNutrientsByIngredient(ingredientId);
-        jLabelIngredientName.setText(ingredientTableModel.getValueAt(jTableIngredients.getSelectedRow(), 1).toString());
-        jLabelIngredientName.setVisible(true);
     }//GEN-LAST:event_jTableIngredientsMouseClicked
+
+    private void jTableNutritionalSheetsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableNutritionalSheetsMouseClicked
+        NutritionalSheet nutritionalSheet = (NutritionalSheet)nutritionalSheetTableModel.getObjectAtRow(jTableNutritionalSheets.getSelectedRow());
+        loadConstraintsByNutritionalSheet(nutritionalSheet);
+    }//GEN-LAST:event_jTableNutritionalSheetsMouseClicked
+
+    private void jButtonNewNutritionalSheetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewNutritionalSheetActionPerformed
+        JDialog formDialog = new JDialog(this, "Nueva Hoja Nutricional", true);
+        JPanelNutritionalSheetForm nutritionalSheetForm = new JPanelNutritionalSheetForm(formDialog);
+        formDialog.setContentPane(nutritionalSheetForm);
+        formDialog.setSize(500, 500);
+        formDialog.setResizable(false);
+        formDialog.setVisible(true);
+        if (nutritionalSheetForm.getSuccess()) {
+            System.out.println("Successfully saved");
+            try {
+                nutritionalSheetTableModel.setNutritionalSheetList(nutritionalSheetDao.queryForAll());
+                nutritionalSheetTableModel.fireTableDataChanged();
+                constraintsByNutSheetTableModel.getNutrientConstraintList().clear();
+                jTextAreaNutritionalSheetName.setText("");
+            } catch(SQLException ex) {
+                //TODO: handle refresh table data
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jButtonNewNutritionalSheetActionPerformed
+
+    private void jButtonEditNutritionalSheetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditNutritionalSheetActionPerformed
+        JDialog formDialog = new JDialog(this, "Modificar Hoja Nutricional", true);
+        int rowIndex = jTableNutritionalSheets.getSelectedRow();
+        NutritionalSheet toModify = (NutritionalSheet)nutritionalSheetTableModel.getObjectAtRow(rowIndex);
+        JPanelNutritionalSheetForm nutritionalSheetForm = new JPanelNutritionalSheetForm(formDialog, toModify.getId());
+        formDialog.setContentPane(nutritionalSheetForm);
+        formDialog.setSize(500, 500);
+        formDialog.setResizable(false);
+        formDialog.setVisible(true);
+        if (nutritionalSheetForm.getSuccess()) {
+            System.out.println("Successfully saved");
+            try {
+                nutritionalSheetTableModel.setNutritionalSheetList(nutritionalSheetDao.queryForAll());
+                nutritionalSheetTableModel.fireTableDataChanged();
+                constraintsByNutSheetTableModel.getNutrientConstraintList().clear();
+                jTextAreaNutritionalSheetName.setText("");
+            } catch(SQLException ex) {
+                //TODO: handle refresh table data
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jButtonEditNutritionalSheetActionPerformed
+
+    private void jButtonDeleteNutritionalSheetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteNutritionalSheetActionPerformed
+        deleteNutritionalSheet();
+    }//GEN-LAST:event_jButtonDeleteNutritionalSheetActionPerformed
+    
+    private void loadConstraintsByNutritionalSheet(NutritionalSheet nutritionalSheet) {
+        try {
+            nutritionalSheetDao.populateNutritionalSheet(nutritionalSheet);
+            constraintsByNutSheetTableModel.setNutrientConstraintList(nutritionalSheet.getNutrientConstraintList());
+            constraintsByNutSheetTableModel.fireTableDataChanged();
+            jTextAreaNutritionalSheetName.setText(nutritionalSheet.getName());
+        } catch(SQLException ex) {
+            //TODO: handle load constraints
+            ex.printStackTrace();
+        }
+    }
     
     private void loadNutrientsByIngredient(Long ingredientId) {
         try {
@@ -408,6 +708,8 @@ public class JFrameMain extends javax.swing.JFrame {
             ingredient = ingredientDao.populateNutrients(ingredient);
             nutrientsByIngredientTableModel.setNutrientList(ingredient.getNutrients());
             nutrientsByIngredientTableModel.fireTableDataChanged();
+            jLabelIngredientName.setText(ingredientTableModel.getValueAt(jTableIngredients.getSelectedRow(), 1).toString());
+            jLabelIngredientName.setVisible(true);
         } catch(SQLException ex) {
             //TODO: handle load nutrients
             ex.printStackTrace();
@@ -455,22 +757,32 @@ public class JFrameMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDeleteIngredient;
     private javax.swing.JButton jButtonDeleteNutrient;
+    private javax.swing.JButton jButtonDeleteNutritionalSheet;
     private javax.swing.JButton jButtonEditIngredient;
     private javax.swing.JButton jButtonEditNutrient;
+    private javax.swing.JButton jButtonEditNutritionalSheet;
     private javax.swing.JButton jButtonExportNutrientList;
     private javax.swing.JButton jButtonNewIngredient;
     private javax.swing.JButton jButtonNewNutrient;
+    private javax.swing.JButton jButtonNewNutritionalSheet;
     private javax.swing.JLabel jLabelIngredientName;
     private javax.swing.JPanel jPanelHome;
     private javax.swing.JPanel jPanelIngredientDetail;
     private javax.swing.JPanel jPanelIngredients;
     private javax.swing.JPanel jPanelNutrients;
+    private javax.swing.JPanel jPanelNutritionalSheet;
+    private javax.swing.JPanel jPanelNutritionalSheetDetail;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JTable jTableIngredientDetails;
     private javax.swing.JTable jTableIngredients;
     private javax.swing.JTable jTableNutrients;
+    private javax.swing.JTable jTableNutritionalConstraints;
+    private javax.swing.JTable jTableNutritionalSheets;
+    private javax.swing.JTextArea jTextAreaNutritionalSheetName;
     // End of variables declaration//GEN-END:variables
 }
