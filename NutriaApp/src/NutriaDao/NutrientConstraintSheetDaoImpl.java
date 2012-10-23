@@ -1,5 +1,7 @@
-package NutriaModel;
+package NutriaDao;
 
+import NutriaModel.NutrientConstraint;
+import NutriaModel.NutrientConstraintSheet;
 import com.j256.ormlite.dao.BaseDaoImpl;
 import com.j256.ormlite.support.ConnectionSource;
 import java.sql.SQLException;
@@ -9,27 +11,27 @@ import java.util.List;
  *
  * @author Ariel
  */
-public class NutritionalSheetDaoImpl extends BaseDaoImpl<NutritionalSheet, Long> 
-implements NutritionalSheetDao {
+public class NutrientConstraintSheetDaoImpl extends BaseDaoImpl<NutrientConstraintSheet, Long> 
+implements NutrientConstraintSheetDao {
     
     private NutrientConstraintDaoImpl nutrientConstraintDao;
     
-    public NutritionalSheetDaoImpl() throws SQLException {
-        super(new DbConnection().getConnection(), NutritionalSheet.class);
+    public NutrientConstraintSheetDaoImpl() throws SQLException {
+        super(new DbConnection().getConnection(), NutrientConstraintSheet.class);
         nutrientConstraintDao = new NutrientConstraintDaoImpl(this.connectionSource);
     }
     
-    public NutritionalSheetDaoImpl(ConnectionSource connectionSource) throws SQLException {
-        super(connectionSource, NutritionalSheet.class);
+    public NutrientConstraintSheetDaoImpl(ConnectionSource connectionSource) throws SQLException {
+        super(connectionSource, NutrientConstraintSheet.class);
     }
     
-    public void populateNutritionalSheet(NutritionalSheet nutritionalSheet) throws SQLException {
+    public void populateNutritionalSheet(NutrientConstraintSheet nutritionalSheet) throws SQLException {
         List<NutrientConstraint> nutrientConstraintList = nutrientConstraintDao.getByNutritionalSheet(nutritionalSheet.getId());
         nutritionalSheet.setNutrientConstraintList(nutrientConstraintList);
     }
     
     @Override
-    public CreateOrUpdateStatus createOrUpdate(NutritionalSheet nutritionalSheet) throws SQLException {
+    public CreateOrUpdateStatus createOrUpdate(NutrientConstraintSheet nutritionalSheet) throws SQLException {
         int result;
         CreateOrUpdateStatus resultStatus = super.createOrUpdate(nutritionalSheet);
         if(nutritionalSheet.getNutrientConstraintList() != null) {

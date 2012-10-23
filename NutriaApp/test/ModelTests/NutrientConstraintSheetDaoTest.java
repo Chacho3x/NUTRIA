@@ -2,9 +2,9 @@ package ModelTests;
 
 import NutriaModel.Nutrient;
 import NutriaModel.NutrientConstraint;
-import NutriaModel.NutrientDaoImpl;
-import NutriaModel.NutritionalSheet;
-import NutriaModel.NutritionalSheetDaoImpl;
+import NutriaDao.NutrientDaoImpl;
+import NutriaModel.NutrientConstraintSheet;
+import NutriaDao.NutrientConstraintSheetDaoImpl;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +16,13 @@ import org.junit.Test;
  *
  * @author Ariel
  */
-public class NutritionalSheetDaoTest extends BaseDaoTest {
+public class NutrientConstraintSheetDaoTest extends BaseDaoTest {
     
-    private NutritionalSheetDaoImpl nutritionalSheetDao;
+    private NutrientConstraintSheetDaoImpl nutritionalSheetDao;
     private NutrientDaoImpl nutrientDao;
     
-    public NutritionalSheetDaoTest() throws SQLException {
-        nutritionalSheetDao = new NutritionalSheetDaoImpl();
+    public NutrientConstraintSheetDaoTest() throws SQLException {
+        nutritionalSheetDao = new NutrientConstraintSheetDaoImpl();
         nutrientDao = new NutrientDaoImpl();
         
         nutritionalSheetDao.initialize();
@@ -44,12 +44,12 @@ public class NutritionalSheetDaoTest extends BaseDaoTest {
         constraintList.add(new NutrientConstraint(n2, 50D, Relationship.GEQ.toString(), 70D, Relationship.LEQ.toString()));
         constraintList.add(new NutrientConstraint(n3, 70D, Relationship.GEQ.toString(), 90D, Relationship.LEQ.toString()));
         
-        NutritionalSheet ns = new NutritionalSheet("Cerdos 5 meses");
+        NutrientConstraintSheet ns = new NutrientConstraintSheet("Cerdos 5 meses");
         ns.setNutrientConstraintList(constraintList);
         //save nutritionalSheet with 3 constraints
         nutritionalSheetDao.createOrUpdate(ns);
         
-        NutritionalSheet resultNS = nutritionalSheetDao.queryForId(ns.getId());
+        NutrientConstraintSheet resultNS = nutritionalSheetDao.queryForId(ns.getId());
         assertNotNull(resultNS);
         assertNull(resultNS.getNutrientConstraintList());
         

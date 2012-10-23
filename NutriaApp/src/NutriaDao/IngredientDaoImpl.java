@@ -1,6 +1,10 @@
-package NutriaModel;
+package NutriaDao;
 
+import NutriaModel.Ingredient;
+import NutriaModel.Nutrient;
+import NutriaModel.NutrientIngredient;
 import com.j256.ormlite.dao.BaseDaoImpl;
+import com.j256.ormlite.support.ConnectionSource;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -12,6 +16,12 @@ implements IngredientDao {
     
     public IngredientDaoImpl() throws SQLException {
         super(new DbConnection().getConnection(), Ingredient.class);
+        nutrientIngredientDao = new NutrientIngredientDaoImpl(this.connectionSource);
+        nutrientDao = new NutrientDaoImpl(this.connectionSource);
+    }
+
+    public IngredientDaoImpl(ConnectionSource connectionSource) throws SQLException {
+        super(connectionSource, Ingredient.class);
         nutrientIngredientDao = new NutrientIngredientDaoImpl(this.connectionSource);
         nutrientDao = new NutrientDaoImpl(this.connectionSource);
     }

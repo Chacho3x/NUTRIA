@@ -1,15 +1,15 @@
 package NutriaApp;
 
 import NutriaModel.Ingredient;
-import NutriaModel.IngredientDaoImpl;
-import NutriaModel.IngredientTableModel;
-import NutriaModel.NutrientConstraintsByNutSheetCompactTableModel;
-import NutriaModel.NutrientDaoImpl;
-import NutriaModel.NutrientTableModel;
-import NutriaModel.NutrientsByIngredientTableModel;
-import NutriaModel.NutritionalSheet;
-import NutriaModel.NutritionalSheetDaoImpl;
-import NutriaModel.NutritionalSheetTableModel;
+import NutriaDao.IngredientDaoImpl;
+import NutriaTableModel.IngredientTableModel;
+import NutriaTableModel.NutrientConstraintReadOnlyTableModel;
+import NutriaDao.NutrientDaoImpl;
+import NutriaTableModel.NutrientTableModel;
+import NutriaTableModel.NutrientsByIngredientTableModel;
+import NutriaModel.NutrientConstraintSheet;
+import NutriaDao.NutrientConstraintSheetDaoImpl;
+import NutriaTableModel.NutrientConstraintSheetTableModel;
 import java.sql.SQLException;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -26,13 +26,13 @@ public class JFrameMain extends javax.swing.JFrame {
      */
     private NutrientDaoImpl nutrientDao;
     private IngredientDaoImpl ingredientDao;
-    private NutritionalSheetDaoImpl nutritionalSheetDao;
+    private NutrientConstraintSheetDaoImpl nutritionalSheetDao;
     
     private NutrientTableModel nutrientTableModel;
     private NutrientsByIngredientTableModel nutrientsByIngredientTableModel;
     private IngredientTableModel ingredientTableModel;
-    private NutritionalSheetTableModel nutritionalSheetTableModel;
-    private NutrientConstraintsByNutSheetCompactTableModel constraintsByNutSheetTableModel;
+    private NutrientConstraintSheetTableModel nutritionalSheetTableModel;
+    private NutrientConstraintReadOnlyTableModel constraintsByNutSheetTableModel;
     
     public JFrameMain() throws SQLException {
         initComponents();
@@ -75,13 +75,13 @@ public class JFrameMain extends javax.swing.JFrame {
     private void initNutritionalSheetFormComponents() {
         try {
             jTextAreaNutritionalSheetName.setText("");
-            nutritionalSheetDao = new NutritionalSheetDaoImpl();
-            nutritionalSheetTableModel = new NutritionalSheetTableModel();
+            nutritionalSheetDao = new NutrientConstraintSheetDaoImpl();
+            nutritionalSheetTableModel = new NutrientConstraintSheetTableModel();
             nutritionalSheetTableModel.setNutritionalSheetList(nutritionalSheetDao.queryForAll());
             jTableNutritionalSheets.setModel(nutritionalSheetTableModel);
             jTableNutritionalSheets.removeColumn(jTableNutritionalSheets.getColumn("id"));
             
-            constraintsByNutSheetTableModel = new NutrientConstraintsByNutSheetCompactTableModel();
+            constraintsByNutSheetTableModel = new NutrientConstraintReadOnlyTableModel();
             jTableNutritionalConstraints.setModel(constraintsByNutSheetTableModel);
             jTableNutritionalConstraints.removeColumn(jTableNutritionalConstraints.getColumn("id"));
             jTableNutritionalConstraints.getColumn("Nutriente").setPreferredWidth(100);
@@ -597,7 +597,7 @@ public class JFrameMain extends javax.swing.JFrame {
     
     private void deleteNutritionalSheet() {
         int selectedIndex = jTableNutritionalSheets.getSelectedRow();
-        NutritionalSheet nutritionalSheet = (NutritionalSheet)nutritionalSheetTableModel.getObjectAtRow(selectedIndex);
+        NutrientConstraintSheet nutritionalSheet = (NutrientConstraintSheet)nutritionalSheetTableModel.getObjectAtRow(selectedIndex);
         int confirm = JOptionPane.showConfirmDialog(
             this,
             "¿Seguro que desea eliminar la Tabla Nutricional: " + nutritionalSheet.getName() + "?",
@@ -637,7 +637,7 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableIngredientsMouseClicked
 
     private void jTableNutritionalSheetsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableNutritionalSheetsMouseClicked
-        NutritionalSheet nutritionalSheet = (NutritionalSheet)nutritionalSheetTableModel.getObjectAtRow(jTableNutritionalSheets.getSelectedRow());
+        NutrientConstraintSheet nutritionalSheet = (NutrientConstraintSheet)nutritionalSheetTableModel.getObjectAtRow(jTableNutritionalSheets.getSelectedRow());
         loadConstraintsByNutritionalSheet(nutritionalSheet);
     }//GEN-LAST:event_jTableNutritionalSheetsMouseClicked
 
@@ -665,7 +665,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private void jButtonEditNutritionalSheetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditNutritionalSheetActionPerformed
         JDialog formDialog = new JDialog(this, "Modificar Hoja Nutricional", true);
         int rowIndex = jTableNutritionalSheets.getSelectedRow();
-        NutritionalSheet toModify = (NutritionalSheet)nutritionalSheetTableModel.getObjectAtRow(rowIndex);
+        NutrientConstraintSheet toModify = (NutrientConstraintSheet)nutritionalSheetTableModel.getObjectAtRow(rowIndex);
         JPanelNutritionalSheetForm nutritionalSheetForm = new JPanelNutritionalSheetForm(formDialog, toModify.getId());
         formDialog.setContentPane(nutritionalSheetForm);
         formDialog.setSize(500, 500);
@@ -689,7 +689,7 @@ public class JFrameMain extends javax.swing.JFrame {
         deleteNutritionalSheet();
     }//GEN-LAST:event_jButtonDeleteNutritionalSheetActionPerformed
     
-    private void loadConstraintsByNutritionalSheet(NutritionalSheet nutritionalSheet) {
+    private void loadConstraintsByNutritionalSheet(NutrientConstraintSheet nutritionalSheet) {
         try {
             nutritionalSheetDao.populateNutritionalSheet(nutritionalSheet);
             constraintsByNutSheetTableModel.setNutrientConstraintList(nutritionalSheet.getNutrientConstraintList());

@@ -1,5 +1,6 @@
-package NutriaModel;
+package NutriaDao;
 
+import NutriaModel.NutrientConstraint;
 import com.j256.ormlite.dao.Dao;
 
 /**

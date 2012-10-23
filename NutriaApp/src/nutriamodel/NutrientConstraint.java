@@ -15,7 +15,7 @@ public class NutrientConstraint {
     private Long id;
     
     @DatabaseField(foreign = true, columnName = "nutritional_sheet_id")
-    private NutritionalSheet nutritionalSheet;
+    private NutrientConstraintSheet nutritionalSheet;
     
     @DatabaseField(foreign = true, columnName = "nutrient_id")
     private Nutrient nutrient;
@@ -38,7 +38,7 @@ public class NutrientConstraint {
         this.nutrient = nutrient;
     }
     
-    public NutrientConstraint(Nutrient nutrient, NutritionalSheet nutritionalSheet, Double minBound, String minRelationship, Double maxBound, String maxRelationship) {
+    public NutrientConstraint(Nutrient nutrient, NutrientConstraintSheet nutritionalSheet, Double minBound, String minRelationship, Double maxBound, String maxRelationship) {
         this.nutrient = nutrient;
         this.nutritionalSheet = nutritionalSheet;
         this.minBound = minBound;
@@ -47,7 +47,7 @@ public class NutrientConstraint {
         this.maxRelationship = maxRelationship;
     }
     
-    public NutrientConstraint(Nutrient nutrient, NutritionalSheet nutritionalSheet, Double minBound, String minRelationship) {
+    public NutrientConstraint(Nutrient nutrient, NutrientConstraintSheet nutritionalSheet, Double minBound, String minRelationship) {
         this.nutrient = nutrient;
         this.nutritionalSheet = nutritionalSheet;
         this.minBound = minBound;
@@ -84,11 +84,11 @@ public class NutrientConstraint {
         this.nutrient = nutrient;
     }
     
-    public NutritionalSheet getNutritionalSheet() {
+    public NutrientConstraintSheet getNutritionalSheet() {
         return nutritionalSheet;
     }
     
-    public void setNutritionalSheet(NutritionalSheet nutritionalSheet) {
+    public void setNutritionalSheet(NutrientConstraintSheet nutritionalSheet) {
         this.nutritionalSheet = nutritionalSheet;
     }
 

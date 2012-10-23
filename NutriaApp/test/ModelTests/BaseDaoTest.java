@@ -1,6 +1,6 @@
 package ModelTests;
 
-import NutriaModel.ModelHelper;
+import NutriaDao.DaoHelper;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,7 +18,7 @@ public class BaseDaoTest {
     
     @BeforeClass
     public static void setUpClass() throws Exception {
-        ModelHelper.createDataBase();
+        DaoHelper.createDataBase();
     }
     
     @AfterClass
@@ -27,7 +27,7 @@ public class BaseDaoTest {
     
     @Before
     public void setUp() throws Exception {
-        ModelHelper.clearDatabase();
+        DaoHelper.clearDatabase();
     }
     
     @After

@@ -1,9 +1,9 @@
 package ModelTests;
 
 import NutriaModel.Ingredient;
-import NutriaModel.IngredientDaoImpl;
+import NutriaDao.IngredientDaoImpl;
 import NutriaModel.Nutrient;
-import NutriaModel.NutrientDaoImpl;
+import NutriaDao.NutrientDaoImpl;
 import NutriaModel.NutrientIngredient;
 import java.sql.SQLException;
 import java.util.ArrayList;

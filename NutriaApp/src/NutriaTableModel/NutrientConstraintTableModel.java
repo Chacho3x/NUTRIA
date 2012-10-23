@@ -1,5 +1,6 @@
-package NutriaModel;
+package NutriaTableModel;
 
+import NutriaModel.NutrientConstraint;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -8,16 +9,16 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Ariel
  */
-public class NutrientConstraintsByNutSheetTableModel extends AbstractTableModel {
+public class NutrientConstraintTableModel extends AbstractTableModel {
     
     private String[] columnNames = new String[] {"id", "Nutriente", "R1", "Min", "R2", "Max"};
     private List<NutrientConstraint> nutrientConstraintList;
     
-    public NutrientConstraintsByNutSheetTableModel() {
+    public NutrientConstraintTableModel() {
         nutrientConstraintList = new ArrayList<>();
     }
     
-    public NutrientConstraintsByNutSheetTableModel(List<NutrientConstraint> nutrientConstraintList) {
+    public NutrientConstraintTableModel(List<NutrientConstraint> nutrientConstraintList) {
         this.nutrientConstraintList = nutrientConstraintList;
     }
     

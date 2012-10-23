@@ -1,5 +1,6 @@
-package NutriaModel;
+package NutriaTableModel;
 
+import NutriaModel.NutrientIngredient;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;

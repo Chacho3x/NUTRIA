@@ -2,10 +2,10 @@ package ModelTests;
 
 import NutriaModel.Nutrient;
 import NutriaModel.NutrientConstraint;
-import NutriaModel.NutrientConstraintDaoImpl;
-import NutriaModel.NutrientDaoImpl;
-import NutriaModel.NutritionalSheet;
-import NutriaModel.NutritionalSheetDaoImpl;
+import NutriaDao.NutrientConstraintDaoImpl;
+import NutriaDao.NutrientDaoImpl;
+import NutriaModel.NutrientConstraintSheet;
+import NutriaDao.NutrientConstraintSheetDaoImpl;
 import java.sql.SQLException;
 import java.util.List;
 import org.apache.commons.math3.optimization.linear.Relationship;
@@ -19,13 +19,13 @@ import org.junit.Test;
 public class NutrientConstraintDaoTest extends BaseDaoTest {
     
     private NutrientConstraintDaoImpl nutrientConstraintDao;
-    private NutritionalSheetDaoImpl nutritionalSheetDao;
+    private NutrientConstraintSheetDaoImpl nutritionalSheetDao;
     private NutrientDaoImpl nutrientDao;
     
     public NutrientConstraintDaoTest() throws SQLException {
         nutrientConstraintDao = new NutrientConstraintDaoImpl();
         nutrientConstraintDao.initialize();
-        nutritionalSheetDao = new NutritionalSheetDaoImpl();
+        nutritionalSheetDao = new NutrientConstraintSheetDaoImpl();
         nutritionalSheetDao.initialize();
         nutrientDao = new NutrientDaoImpl();
         nutrientDao.initialize();
@@ -67,7 +67,7 @@ public class NutrientConstraintDaoTest extends BaseDaoTest {
         nutrientDao.createOrUpdate(n2);
         nutrientDao.createOrUpdate(n3);
         
-        NutritionalSheet ns = new NutritionalSheet();
+        NutrientConstraintSheet ns = new NutrientConstraintSheet();
         ns.setName("Alimento para aves");
         nutritionalSheetDao.createOrUpdate(ns);
         

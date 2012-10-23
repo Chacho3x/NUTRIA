@@ -1,5 +1,6 @@
-package NutriaModel;
+package NutriaTableModel;
 
+import NutriaModel.NutrientConstraintSheet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -8,24 +9,24 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Ariel
  */
-public class NutritionalSheetTableModel extends AbstractTableModel {
+public class NutrientConstraintSheetTableModel extends AbstractTableModel {
     
     private String[] columnNames = new String[] {"id", "Hoja Nutricional"};
-    private List<NutritionalSheet> nutritionalSheetList;
+    private List<NutrientConstraintSheet> nutritionalSheetList;
     
-    public NutritionalSheetTableModel() {
+    public NutrientConstraintSheetTableModel() {
         nutritionalSheetList = new ArrayList<>();
     }
     
-    public NutritionalSheetTableModel(List<NutritionalSheet> nutritionalSheetList) {
+    public NutrientConstraintSheetTableModel(List<NutrientConstraintSheet> nutritionalSheetList) {
         this.nutritionalSheetList = nutritionalSheetList;
     }
     
-    public void setNutritionalSheetList(List<NutritionalSheet> nutritionalSheetList) {
+    public void setNutritionalSheetList(List<NutrientConstraintSheet> nutritionalSheetList) {
         this.nutritionalSheetList = nutritionalSheetList;
     }
     
-    public List<NutritionalSheet> getNutritionalSheetList() {
+    public List<NutrientConstraintSheet> getNutritionalSheetList() {
         return this.nutritionalSheetList;
     }
     
@@ -38,7 +39,7 @@ public class NutritionalSheetTableModel extends AbstractTableModel {
     }
     
     public Object getValueAt(int rowIndex, int columnIndex) {
-        NutritionalSheet nutritionalSheet = nutritionalSheetList.get(rowIndex);
+        NutrientConstraintSheet nutritionalSheet = nutritionalSheetList.get(rowIndex);
         Object[] values = new Object[] {
             nutritionalSheet.getId(),
             nutritionalSheet.getName()

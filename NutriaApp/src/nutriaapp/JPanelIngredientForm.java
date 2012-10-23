@@ -1,9 +1,9 @@
 package NutriaApp;
 
 import NutriaModel.Ingredient;
-import NutriaModel.IngredientDaoImpl;
+import NutriaDao.IngredientDaoImpl;
 import NutriaModel.NutrientIngredient;
-import NutriaModel.NutrientsByIngredientTableModel;
+import NutriaTableModel.NutrientsByIngredientTableModel;
 import java.sql.SQLException;
 import javax.swing.JDialog;
 

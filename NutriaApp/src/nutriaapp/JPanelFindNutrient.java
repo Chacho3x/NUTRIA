@@ -1,8 +1,8 @@
 package NutriaApp;
 
 import NutriaModel.Nutrient;
-import NutriaModel.NutrientDaoImpl;
-import NutriaModel.NutrientTableModel;
+import NutriaDao.NutrientDaoImpl;
+import NutriaTableModel.NutrientTableModel;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

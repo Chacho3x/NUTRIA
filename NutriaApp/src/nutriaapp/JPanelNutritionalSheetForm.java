@@ -1,9 +1,9 @@
 package NutriaApp;
 
 import NutriaModel.NutrientConstraint;
-import NutriaModel.NutrientConstraintsByNutSheetTableModel;
-import NutriaModel.NutritionalSheet;
-import NutriaModel.NutritionalSheetDaoImpl;
+import NutriaTableModel.NutrientConstraintTableModel;
+import NutriaModel.NutrientConstraintSheet;
+import NutriaDao.NutrientConstraintSheetDaoImpl;
 import java.sql.SQLException;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
@@ -19,10 +19,10 @@ public class JPanelNutritionalSheetForm extends javax.swing.JPanel {
      * Creates new form JPanelNutritionalSheetForm
      */
     
-    private NutritionalSheetDaoImpl nutritionalSheetDao;
+    private NutrientConstraintSheetDaoImpl nutritionalSheetDao;
     private Long nutritionalSheetId;
-    private NutritionalSheet nutritionalSheet;
-    private NutrientConstraintsByNutSheetTableModel constraintsByNutSheetTableModel;
+    private NutrientConstraintSheet nutritionalSheet;
+    private NutrientConstraintTableModel constraintsByNutSheetTableModel;
     private JDialog container;
     private Boolean success = false;
     
@@ -45,13 +45,13 @@ public class JPanelNutritionalSheetForm extends javax.swing.JPanel {
     
     private void initCustomComponents() {
         try {
-            nutritionalSheetDao = new NutritionalSheetDaoImpl();
-            constraintsByNutSheetTableModel = new NutrientConstraintsByNutSheetTableModel();
+            nutritionalSheetDao = new NutrientConstraintSheetDaoImpl();
+            constraintsByNutSheetTableModel = new NutrientConstraintTableModel();
             if(nutritionalSheetId != null) {
                 nutritionalSheet = nutritionalSheetDao.queryForId(nutritionalSheetId);
                 nutritionalSheetDao.populateNutritionalSheet(nutritionalSheet);
             } else {
-                nutritionalSheet = new NutritionalSheet();
+                nutritionalSheet = new NutrientConstraintSheet();
             }
             mappNutritionalSheetToForm();
         } catch(SQLException ex) {

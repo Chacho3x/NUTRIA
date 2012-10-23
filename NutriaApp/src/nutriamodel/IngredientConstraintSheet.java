@@ -8,8 +8,9 @@ import java.util.List;
  *
  * @author Ariel
  */
-@DatabaseTable(tableName = "nutritional_sheet")
-public class NutritionalSheet {
+
+@DatabaseTable
+public class IngredientConstraintSheet {
     
     @DatabaseField(generatedId = true)
     private Long id;
@@ -17,14 +18,8 @@ public class NutritionalSheet {
     @DatabaseField
     private String name;
     
-    private List<NutrientConstraint> nutrientConstraintList;
+    private List<IngredientConstraint> ingredientConstraintList;
 
-    public NutritionalSheet() {}
-    
-    public NutritionalSheet(String name) {
-        this.name = name;
-    }
-    
     public Long getId() {
         return id;
     }
@@ -41,16 +36,16 @@ public class NutritionalSheet {
         this.name = name;
     }
 
-    public List<NutrientConstraint> getNutrientConstraintList() {
-        return nutrientConstraintList;
+    public List<IngredientConstraint> getIngredientConstraintList() {
+        return ingredientConstraintList;
     }
 
-    public void setNutrientConstraintList(List<NutrientConstraint> nutrientConstraintList) {
-        this.nutrientConstraintList = nutrientConstraintList;
+    public void setIngredientConstraintList(List<IngredientConstraint> ingredientConstraintList) {
+        this.ingredientConstraintList = ingredientConstraintList;
     }
 
     @Override
     public String toString() {
-        return "NutritionalSheet{" + "id=" + id + ", name=" + name + '}';
+        return "IngredientSheet{" + "id=" + id + ", name=" + name + '}';
     }
 }
