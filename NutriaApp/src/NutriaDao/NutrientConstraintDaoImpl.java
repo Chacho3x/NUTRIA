@@ -27,7 +27,7 @@ implements NutrientConstraintDao {
         nutrientDao = new NutrientDaoImpl(this.connectionSource);
     }
     
-    public List<NutrientConstraint> getByNutritionalSheet(Long nutritionalSheetId) throws SQLException {
+    public List<NutrientConstraint> getByNutrientConstraintSheet(Long nutritionalSheetId) throws SQLException {
         QueryBuilder qb = this.queryBuilder();
         PreparedQuery pq = qb.where().eq("nutritional_sheet_id", nutritionalSheetId).prepare();
         List<NutrientConstraint> nutrientConstraintList = this.query(pq);

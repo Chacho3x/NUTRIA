@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author Ariel
  */
-@DatabaseTable(tableName = "nutritional_sheet")
+@DatabaseTable(tableName = "nutrient_constraint_sheet")
 public class NutrientConstraintSheet {
     
     @DatabaseField(generatedId = true)

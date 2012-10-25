@@ -9,7 +9,7 @@ import java.util.List;
  * @author Ariel
  */
 
-@DatabaseTable
+@DatabaseTable(tableName = "ingredient_constraint_sheet")
 public class IngredientConstraintSheet {
     
     @DatabaseField(generatedId = true)

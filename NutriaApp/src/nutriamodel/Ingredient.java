@@ -21,17 +21,17 @@ public class Ingredient implements Serializable {
     @DatabaseField
     private Double price;
     
-    @DatabaseField(columnName = "rounding_factor")
-    private Double roundingFactor;
+    @DatabaseField(columnName = "wetness_percentage")
+    private Double wetnessPercentage;
     
     private List<NutrientIngredient> nutrients = new ArrayList<>();
     
     public Ingredient() {}
     
-    public Ingredient(String name, Double price, Double roundingFactor) {
+    public Ingredient(String name, Double price, Double wetnessPercentage) {
         this.name = name;
         this.price = price;
-        this.roundingFactor = roundingFactor;
+        this.wetnessPercentage = wetnessPercentage;
     }
     
     public Long getId() {
@@ -58,12 +58,12 @@ public class Ingredient implements Serializable {
         this.price = price;
     }
 
-    public Double getRoundingFactor() {
-        return roundingFactor;
+    public Double getWetnessPercentage() {
+        return wetnessPercentage;
     }
 
-    public void setRoundingFactor(Double roundingFactor) {
-        this.roundingFactor = roundingFactor;
+    public void setWetnessPercentage(Double roundingFactor) {
+        this.wetnessPercentage = roundingFactor;
     }
 
     public List<NutrientIngredient> getNutrients() {
@@ -76,7 +76,7 @@ public class Ingredient implements Serializable {
 
     @Override
     public String toString() {
-        return "Ingredient{" + "id=" + id + ", name=" + name + ", price=" + price + ", roundingFactor=" + roundingFactor + '}';
+        return "Ingredient{" + "id=" + id + ", name=" + name + ", price=" + price + ", wetnessPercentage=" + wetnessPercentage + '}';
     }
 
     @Override
@@ -85,7 +85,7 @@ public class Ingredient implements Serializable {
         hash = 37 * hash + Objects.hashCode(this.id);
         hash = 37 * hash + Objects.hashCode(this.name);
         hash = 37 * hash + Objects.hashCode(this.price);
-        hash = 37 * hash + Objects.hashCode(this.roundingFactor);
+        hash = 37 * hash + Objects.hashCode(this.wetnessPercentage);
         return hash;
     }
 
@@ -107,7 +107,7 @@ public class Ingredient implements Serializable {
         if (!Objects.equals(this.price, other.price)) {
             return false;
         }
-        if (!Objects.equals(this.roundingFactor, other.roundingFactor)) {
+        if (!Objects.equals(this.wetnessPercentage, other.wetnessPercentage)) {
             return false;
         }
         return true;

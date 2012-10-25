@@ -79,7 +79,7 @@ public class NutrientConstraintDaoTest extends BaseDaoTest {
         nutrientConstraintDao.createOrUpdate(nc2);
         nutrientConstraintDao.createOrUpdate(nc3);
         
-        List<NutrientConstraint> ncList = nutrientConstraintDao.getByNutritionalSheet(ns.getId());
+        List<NutrientConstraint> ncList = nutrientConstraintDao.getByNutrientConstraintSheet(ns.getId());
         assertEquals(3, ncList.size());
     }
 }

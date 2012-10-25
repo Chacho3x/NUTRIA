@@ -130,6 +130,7 @@ public class JFrameMain extends javax.swing.JFrame {
         jButtonNewNutritionalSheet = new javax.swing.JButton();
         jButtonEditNutritionalSheet = new javax.swing.JButton();
         jButtonDeleteNutritionalSheet = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -435,6 +436,19 @@ public class JFrameMain extends javax.swing.JFrame {
 
         jTabbedPaneMain.addTab("Listas Nutricionales", jPanelNutritionalSheet);
 
+        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 580, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 364, Short.MAX_VALUE)
+        );
+
+        jTabbedPaneMain.addTab("Calculos de Mezcla", null, jPanel1, "Calculos de Mezcla");
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -643,7 +657,7 @@ public class JFrameMain extends javax.swing.JFrame {
 
     private void jButtonNewNutritionalSheetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewNutritionalSheetActionPerformed
         JDialog formDialog = new JDialog(this, "Nueva Hoja Nutricional", true);
-        JPanelNutritionalSheetForm nutritionalSheetForm = new JPanelNutritionalSheetForm(formDialog);
+        JPanelNutrientConstraintSheetForm nutritionalSheetForm = new JPanelNutrientConstraintSheetForm(formDialog);
         formDialog.setContentPane(nutritionalSheetForm);
         formDialog.setSize(500, 500);
         formDialog.setResizable(false);
@@ -666,7 +680,7 @@ public class JFrameMain extends javax.swing.JFrame {
         JDialog formDialog = new JDialog(this, "Modificar Hoja Nutricional", true);
         int rowIndex = jTableNutritionalSheets.getSelectedRow();
         NutrientConstraintSheet toModify = (NutrientConstraintSheet)nutritionalSheetTableModel.getObjectAtRow(rowIndex);
-        JPanelNutritionalSheetForm nutritionalSheetForm = new JPanelNutritionalSheetForm(formDialog, toModify.getId());
+        JPanelNutrientConstraintSheetForm nutritionalSheetForm = new JPanelNutrientConstraintSheetForm(formDialog, toModify.getId());
         formDialog.setContentPane(nutritionalSheetForm);
         formDialog.setSize(500, 500);
         formDialog.setResizable(false);
@@ -691,7 +705,7 @@ public class JFrameMain extends javax.swing.JFrame {
     
     private void loadConstraintsByNutritionalSheet(NutrientConstraintSheet nutritionalSheet) {
         try {
-            nutritionalSheetDao.populateNutritionalSheet(nutritionalSheet);
+            nutritionalSheetDao.populateNutrientConstraintSheet(nutritionalSheet);
             constraintsByNutSheetTableModel.setNutrientConstraintList(nutritionalSheet.getNutrientConstraintList());
             constraintsByNutSheetTableModel.fireTableDataChanged();
             jTextAreaNutritionalSheetName.setText(nutritionalSheet.getName());
@@ -766,6 +780,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JButton jButtonNewNutrient;
     private javax.swing.JButton jButtonNewNutritionalSheet;
     private javax.swing.JLabel jLabelIngredientName;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelHome;
     private javax.swing.JPanel jPanelIngredientDetail;
     private javax.swing.JPanel jPanelIngredients;

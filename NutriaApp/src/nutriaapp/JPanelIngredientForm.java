@@ -61,8 +61,8 @@ public class JPanelIngredientForm extends javax.swing.JPanel {
             jTextFieldName.setText(ingredient.getName());
         if (ingredient.getPrice() != null)
             jTextFieldPrice.setText(ingredient.getPrice().toString());
-        if (ingredient.getRoundingFactor() != null)
-            jComboBoxRoundingFactor.setSelectedItem(ingredient.getRoundingFactor());
+        if (ingredient.getWetnessPercentage() != null)
+            jComboBoxRoundingFactor.setSelectedItem(ingredient.getWetnessPercentage());
         else
             jComboBoxRoundingFactor.setSelectedItem("1");
         
@@ -76,7 +76,7 @@ public class JPanelIngredientForm extends javax.swing.JPanel {
     private void mappFormToIngredient() {
         ingredient.setName(jTextFieldName.getText());
         ingredient.setPrice(Double.parseDouble(jTextFieldPrice.getText()));
-        ingredient.setRoundingFactor(Double.parseDouble(jComboBoxRoundingFactor.getSelectedItem().toString()));
+        ingredient.setWetnessPercentage(Double.parseDouble(jComboBoxRoundingFactor.getSelectedItem().toString()));
         ingredient.setNutrients(nutrientsByIngredientTableModel.getNutrientList());
     }
     

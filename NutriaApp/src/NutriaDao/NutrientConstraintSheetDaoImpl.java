@@ -25,18 +25,18 @@ implements NutrientConstraintSheetDao {
         super(connectionSource, NutrientConstraintSheet.class);
     }
     
-    public void populateNutritionalSheet(NutrientConstraintSheet nutritionalSheet) throws SQLException {
-        List<NutrientConstraint> nutrientConstraintList = nutrientConstraintDao.getByNutritionalSheet(nutritionalSheet.getId());
-        nutritionalSheet.setNutrientConstraintList(nutrientConstraintList);
+    public void populateNutrientConstraintSheet(NutrientConstraintSheet nutrientConstraintSheet) throws SQLException {
+        List<NutrientConstraint> nutrientConstraintList = nutrientConstraintDao.getByNutrientConstraintSheet(nutrientConstraintSheet.getId());
+        nutrientConstraintSheet.setNutrientConstraintList(nutrientConstraintList);
     }
     
     @Override
-    public CreateOrUpdateStatus createOrUpdate(NutrientConstraintSheet nutritionalSheet) throws SQLException {
+    public CreateOrUpdateStatus createOrUpdate(NutrientConstraintSheet nutrientConstraintSheet) throws SQLException {
         int result;
-        CreateOrUpdateStatus resultStatus = super.createOrUpdate(nutritionalSheet);
-        if(nutritionalSheet.getNutrientConstraintList() != null) {
-            List<NutrientConstraint> modifiedNutrientConstraints = nutritionalSheet.getNutrientConstraintList();
-            List<NutrientConstraint> lastNutrientConstraints = nutrientConstraintDao.getByNutritionalSheet(nutritionalSheet.getId());
+        CreateOrUpdateStatus resultStatus = super.createOrUpdate(nutrientConstraintSheet);
+        if(nutrientConstraintSheet.getNutrientConstraintList() != null) {
+            List<NutrientConstraint> modifiedNutrientConstraints = nutrientConstraintSheet.getNutrientConstraintList();
+            List<NutrientConstraint> lastNutrientConstraints = nutrientConstraintDao.getByNutrientConstraintSheet(nutrientConstraintSheet.getId());
             
             //delete nutrientConstraints removed
             for(NutrientConstraint lastNutrientConstraint : lastNutrientConstraints) {
@@ -57,23 +57,23 @@ implements NutrientConstraintSheetDao {
             
             //add or update nutrient constraints
             for(NutrientConstraint nutrientConstraint : modifiedNutrientConstraints) {
-                nutrientConstraint.setNutritionalSheet(nutritionalSheet);
+                nutrientConstraint.setNutritionalSheet(nutrientConstraintSheet);
                 nutrientConstraintDao.createOrUpdate(nutrientConstraint);
             }
-            populateNutritionalSheet(nutritionalSheet);
+            populateNutrientConstraintSheet(nutrientConstraintSheet);
         }
         return resultStatus;
     }
     
     @Override
-    public int deleteById(Long nutritionalSheetId) throws SQLException {
+    public int deleteById(Long nutrientConstraintSheetId) throws SQLException {
         int result = 0;
-        List<NutrientConstraint> nutrientConstraintList = nutrientConstraintDao.getByNutritionalSheet(nutritionalSheetId);
+        List<NutrientConstraint> nutrientConstraintList = nutrientConstraintDao.getByNutrientConstraintSheet(nutrientConstraintSheetId);
         for (NutrientConstraint nc : nutrientConstraintList) {
             result += nutrientConstraintDao.deleteById(nc.getId());
         }
         if(result == nutrientConstraintList.size()) {
-            result = super.deleteById(nutritionalSheetId);
+            result = super.deleteById(nutrientConstraintSheetId);
         } else {
             result = 0;
         }

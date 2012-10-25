@@ -13,28 +13,28 @@ import javax.swing.JDialog;
  *
  * @author Ariel
  */
-public class JPanelNutritionalSheetForm extends javax.swing.JPanel {
+public class JPanelNutrientConstraintSheetForm extends javax.swing.JPanel {
 
     /**
      * Creates new form JPanelNutritionalSheetForm
      */
     
-    private NutrientConstraintSheetDaoImpl nutritionalSheetDao;
-    private Long nutritionalSheetId;
-    private NutrientConstraintSheet nutritionalSheet;
+    private NutrientConstraintSheetDaoImpl nutrientConstraintSheetDao;
+    private Long nutrientConstraintSheetId;
+    private NutrientConstraintSheet nutrientConstraintSheet;
     private NutrientConstraintTableModel constraintsByNutSheetTableModel;
     private JDialog container;
     private Boolean success = false;
     
-    public JPanelNutritionalSheetForm(JDialog container) {
+    public JPanelNutrientConstraintSheetForm(JDialog container) {
         this.container = container;
         initComponents();
         initCustomComponents();
     }
     
-    public JPanelNutritionalSheetForm(JDialog container, Long nutritionalSheetId) {
+    public JPanelNutrientConstraintSheetForm(JDialog container, Long nutrientConstraintSheetId) {
         this.container = container;
-        this.nutritionalSheetId = nutritionalSheetId;
+        this.nutrientConstraintSheetId = nutrientConstraintSheetId;
         initComponents();
         initCustomComponents();
     }
@@ -45,13 +45,13 @@ public class JPanelNutritionalSheetForm extends javax.swing.JPanel {
     
     private void initCustomComponents() {
         try {
-            nutritionalSheetDao = new NutrientConstraintSheetDaoImpl();
+            nutrientConstraintSheetDao = new NutrientConstraintSheetDaoImpl();
             constraintsByNutSheetTableModel = new NutrientConstraintTableModel();
-            if(nutritionalSheetId != null) {
-                nutritionalSheet = nutritionalSheetDao.queryForId(nutritionalSheetId);
-                nutritionalSheetDao.populateNutritionalSheet(nutritionalSheet);
+            if(nutrientConstraintSheetId != null) {
+                nutrientConstraintSheet = nutrientConstraintSheetDao.queryForId(nutrientConstraintSheetId);
+                nutrientConstraintSheetDao.populateNutrientConstraintSheet(nutrientConstraintSheet);
             } else {
-                nutritionalSheet = new NutrientConstraintSheet();
+                nutrientConstraintSheet = new NutrientConstraintSheet();
             }
             mappNutritionalSheetToForm();
         } catch(SQLException ex) {
@@ -61,9 +61,9 @@ public class JPanelNutritionalSheetForm extends javax.swing.JPanel {
     }
     
     private void mappNutritionalSheetToForm() {
-        jTextFieldNutritionalSheetName.setText(nutritionalSheet.getName());
-        if(nutritionalSheet.getNutrientConstraintList() != null) {
-            constraintsByNutSheetTableModel.setNutrientConstraintList(nutritionalSheet.getNutrientConstraintList());
+        jTextFieldNutritionalSheetName.setText(nutrientConstraintSheet.getName());
+        if(nutrientConstraintSheet.getNutrientConstraintList() != null) {
+            constraintsByNutSheetTableModel.setNutrientConstraintList(nutrientConstraintSheet.getNutrientConstraintList());
         }
         jTableNutrientConstraints.setModel(constraintsByNutSheetTableModel);
         jTableNutrientConstraints.removeColumn(jTableNutrientConstraints.getColumn("id"));
@@ -80,15 +80,15 @@ public class JPanelNutritionalSheetForm extends javax.swing.JPanel {
     }
     
     private void mappFormToNutritionalSheet() {
-        nutritionalSheet.setName(jTextFieldNutritionalSheetName.getText());
-        nutritionalSheet.setNutrientConstraintList(constraintsByNutSheetTableModel.getNutrientConstraintList());
+        nutrientConstraintSheet.setName(jTextFieldNutritionalSheetName.getText());
+        nutrientConstraintSheet.setNutrientConstraintList(constraintsByNutSheetTableModel.getNutrientConstraintList());
     }
     
     private void processSave() {
         mappFormToNutritionalSheet();
         try {
-            nutritionalSheetDao.createOrUpdate(nutritionalSheet);
-            nutritionalSheetId = nutritionalSheet.getId();
+            nutrientConstraintSheetDao.createOrUpdate(nutrientConstraintSheet);
+            nutrientConstraintSheetId = nutrientConstraintSheet.getId();
             success = true;
         } catch(SQLException ex) {
             //TODO: handle ingredient save exception

@@ -54,7 +54,7 @@ public class NutrientConstraintSheetDaoTest extends BaseDaoTest {
         assertNull(resultNS.getNutrientConstraintList());
         
         //check constraints saved.
-        nutritionalSheetDao.populateNutritionalSheet(resultNS);
+        nutritionalSheetDao.populateNutrientConstraintSheet(resultNS);
         List<NutrientConstraint> resultConstraintList = resultNS.getNutrientConstraintList();
         assertNotNull(resultConstraintList);
         assertEquals(3, resultConstraintList.size());

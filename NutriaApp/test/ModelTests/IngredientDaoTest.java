@@ -37,7 +37,7 @@ public class IngredientDaoTest extends BaseDaoTest {
         Ingredient firstIngredient = new Ingredient();
         firstIngredient.setName("Harina de hueso");
         firstIngredient.setPrice(5D);
-        firstIngredient.setRoundingFactor(0.1D);
+        firstIngredient.setWetnessPercentage(0.1D);
         ingredientDao.createOrUpdate(firstIngredient);
         ingredientList = ingredientDao.queryForAll();
         assertEquals(totalIngredients + 1, ingredientList.size());
@@ -51,7 +51,7 @@ public class IngredientDaoTest extends BaseDaoTest {
         assertEquals(firstIngredient.getId(), resultIngredient.getId());
         assertEquals(firstIngredient.getName(), resultIngredient.getName());
         assertEquals(firstIngredient.getPrice(), resultIngredient.getPrice());
-        assertEquals(firstIngredient.getRoundingFactor(), resultIngredient.getRoundingFactor());
+        assertEquals(firstIngredient.getWetnessPercentage(), resultIngredient.getWetnessPercentage());
         
         //Delete
         result = ingredientDao.deleteById(firstIngredient.getId());

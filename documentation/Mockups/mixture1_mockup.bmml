@@ -1,0 +1,74 @@
+<mockup version="1.0" skin="sketch" measuredW="765" measuredH="476" mockupW="593" mockupH="468">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="172" y="8" w="593" h="468" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bottomheight>0</bottomheight>
+        <close>true</close>
+        <maximizeRestore>false</maximizeRestore>
+        <minimize>true</minimize>
+        <text>Ingredientes</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::ButtonBar" x="172" y="30" w="443" h="74" measuredW="424" measuredH="29" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>3</selectedIndex>
+        <text>Inicio%2C%20Nutrientes%2C%20Ingredientes%2C%20Listas%2CMezclas%2C%20...</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::MultilineButton" x="187" y="393" w="84" h="61" measuredW="98" measuredH="68" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>PlusIcon%7Cxsmall</icon>
+        <size>16</size>
+        <text>Nueva%20%0AMezcla</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::MultilineButton" x="286" y="393" w="89" h="61" measuredW="95" measuredH="69" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Modificar%0AMezcla</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::MultilineButton" x="384" y="393" w="89" h="61" measuredW="86" measuredH="69" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Eliminar%0AMezcla</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::DataGrid" x="187" y="119" w="287" h="259" measuredW="260" measuredH="91" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <rowHeight>22</rowHeight>
+        <text>Nombre%20de%20la%20Mezcla%0AMezcla%20de%20engorde%20ponedoras%203%20meses%0AMezcla%20de%20crecimiento%20gallinas%202%20semanas%0AMezcla%20de%20crecimiento%20gallinas%204%20semanas</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::FieldSet" x="493" y="119" w="257" h="259" measuredW="200" measuredH="170" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Detalle%20de%20Mezcla</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Label" x="508" y="136" w="-1" h="-1" measuredW="57" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Nombre%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::TextArea" x="508" y="225" w="227" h="99" measuredW="200" measuredH="140" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>16777215</borderColor>
+        <text>Mezcla%20para%20el%20engorde%20de%20gallinas%20ponedoras%20de%203%20meses.%20Alto%20en%20cistina%20para%20la%20rapida%20ovulaci%F3n%20y%20enriquecimiento%20de%20calcio%20en%20los%20huevos.</text>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::Label" x="508" y="204" w="-1" h="-1" measuredW="77" measuredH="21" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Descripci%F3n%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::TextArea" x="508" y="157" w="227" h="47" measuredW="200" measuredH="140" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>16777215</borderColor>
+        <text>Mezcla%20de%20Engorde%20de%20gallinas%20ponedoras%20de%203%20meses.</text>
+      </controlProperties>
+    </control>
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::Button" x="565" y="339" w="-1" h="-1" measuredW="112" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Mostrar%20Detalle</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
