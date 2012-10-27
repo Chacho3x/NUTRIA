@@ -240,8 +240,7 @@ public class JPanelNutrientConstraintSheetForm extends javax.swing.JPanel {
 
     private void jButtonRemoveNutrientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveNutrientActionPerformed
         int rowIndex = jTableNutrientConstraints.getSelectedRow();
-        NutrientConstraint toRemove = (NutrientConstraint)constraintsByNutSheetTableModel.getObjectAtRow(rowIndex);
-        constraintsByNutSheetTableModel.getNutrientConstraintList().remove(toRemove);
+        constraintsByNutSheetTableModel.getNutrientConstraintList().remove(rowIndex);
         constraintsByNutSheetTableModel.fireTableDataChanged();
     }//GEN-LAST:event_jButtonRemoveNutrientActionPerformed
 

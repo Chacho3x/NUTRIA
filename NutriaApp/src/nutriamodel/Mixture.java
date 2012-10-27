@@ -17,6 +17,9 @@ public class Mixture {
     @DatabaseField
     private String name;
     
+    @DatabaseField
+    private String description;
+    
     @DatabaseField(columnName = "wet_ingredients")
     private Boolean wetIngredients;
     
@@ -56,7 +59,15 @@ public class Mixture {
     public void setName(String name) {
         this.name = name;
     }
+    
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
     public Boolean getWetIngredients() {
         return wetIngredients;
     }
@@ -110,6 +121,7 @@ public class Mixture {
         return "Mixture{" 
                 + "id=" + id 
                 + ", name=" + name 
+                + ", description=" + description 
                 + ", wetIngredients=" + wetIngredients 
                 + ", mixtureCost=" + mixtureCost 
                 + ", totalWebQuantity=" + totalWetQuantity 

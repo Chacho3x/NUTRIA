@@ -3,6 +3,7 @@ package NutriaTableModel;
 import NutriaModel.NutrientConstraint;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Hashtable;
 import javax.swing.table.AbstractTableModel;
 
 /**

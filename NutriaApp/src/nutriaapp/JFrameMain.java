@@ -1,19 +1,21 @@
 package NutriaApp;
 
-import NutriaModel.Ingredient;
 import NutriaDao.IngredientDaoImpl;
-import NutriaTableModel.IngredientTableModel;
-import NutriaTableModel.NutrientConstraintReadOnlyTableModel;
+import NutriaDao.MixtureDaoImpl;
+import NutriaDao.NutrientConstraintSheetDaoImpl;
 import NutriaDao.NutrientDaoImpl;
+import NutriaModel.Ingredient;
+import NutriaModel.Mixture;
+import NutriaModel.NutrientConstraintSheet;
+import NutriaTableModel.IngredientTableModel;
+import NutriaTableModel.MixtureTableModel;
+import NutriaTableModel.NutrientConstraintReadOnlyTableModel;
+import NutriaTableModel.NutrientConstraintSheetTableModel;
 import NutriaTableModel.NutrientTableModel;
 import NutriaTableModel.NutrientsByIngredientTableModel;
-import NutriaModel.NutrientConstraintSheet;
-import NutriaDao.NutrientConstraintSheetDaoImpl;
-import NutriaTableModel.NutrientConstraintSheetTableModel;
 import java.sql.SQLException;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 
 /**
  *
@@ -27,18 +29,21 @@ public class JFrameMain extends javax.swing.JFrame {
     private NutrientDaoImpl nutrientDao;
     private IngredientDaoImpl ingredientDao;
     private NutrientConstraintSheetDaoImpl nutritionalSheetDao;
+    private MixtureDaoImpl mixtureDao;
     
     private NutrientTableModel nutrientTableModel;
     private NutrientsByIngredientTableModel nutrientsByIngredientTableModel;
     private IngredientTableModel ingredientTableModel;
     private NutrientConstraintSheetTableModel nutritionalSheetTableModel;
     private NutrientConstraintReadOnlyTableModel constraintsByNutSheetTableModel;
+    private MixtureTableModel mixtureTableModel;
     
     public JFrameMain() throws SQLException {
         initComponents();
         initNutrientFormComponents();
         initIngredientFormComponents();
-        initNutritionalSheetFormComponents();
+        initNutritientConstraintSheetFormComponents();
+        initMixtureFormComponents();
     }
     
     private void initNutrientFormComponents() {
@@ -72,7 +77,7 @@ public class JFrameMain extends javax.swing.JFrame {
         }
     }
     
-    private void initNutritionalSheetFormComponents() {
+    private void initNutritientConstraintSheetFormComponents() {
         try {
             jTextAreaNutritionalSheetName.setText("");
             nutritionalSheetDao = new NutrientConstraintSheetDaoImpl();
@@ -88,6 +93,20 @@ public class JFrameMain extends javax.swing.JFrame {
             
         } catch(SQLException ex) {
             //TODO: handle
+            ex.printStackTrace();
+        }
+    }
+    
+    private void initMixtureFormComponents() {
+        try {
+            mixtureDao = new MixtureDaoImpl();
+            mixtureTableModel = new MixtureTableModel();
+            mixtureTableModel.setMixtureList(mixtureDao.queryForAll());
+            jTableMixture.setModel(mixtureTableModel);
+            jTableMixture.removeColumn(jTableMixture.getColumn("id"));
+            jTableMixture.removeColumn(jTableMixture.getColumn("Descripcion"));
+        } catch(SQLException ex) {
+            //TODO: handle initMixtureComonents
             ex.printStackTrace();
         }
     }
@@ -131,6 +150,19 @@ public class JFrameMain extends javax.swing.JFrame {
         jButtonEditNutritionalSheet = new javax.swing.JButton();
         jButtonDeleteNutritionalSheet = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTableMixture = new javax.swing.JTable();
+        jPanelMixtureDetail = new javax.swing.JPanel();
+        jLabelMixtureName = new javax.swing.JLabel();
+        jScrollPaneMixtureName = new javax.swing.JScrollPane();
+        jTextAreaMixtureName = new javax.swing.JTextArea();
+        jLabelMixtureDescription = new javax.swing.JLabel();
+        jScrollPaneMixtureDescription = new javax.swing.JScrollPane();
+        jTextAreaMixtureDescription = new javax.swing.JTextArea();
+        jButtonShowMixtureDetails = new javax.swing.JButton();
+        jButtonNewMixture = new javax.swing.JButton();
+        jButtonEditMixture = new javax.swing.JButton();
+        jButtonDeleteMixture = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -142,7 +174,7 @@ public class JFrameMain extends javax.swing.JFrame {
         );
         jPanelHomeLayout.setVerticalGroup(
             jPanelHomeLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 364, Short.MAX_VALUE)
+            .add(0, 361, Short.MAX_VALUE)
         );
 
         jTabbedPaneMain.addTab("<html>\n<body style=\"height: 50px;\">\nInicio\n</body>\n</html>", jPanelHome);
@@ -208,10 +240,10 @@ public class JFrameMain extends javax.swing.JFrame {
                             .add(jPanelNutrientsLayout.createSequentialGroup()
                                 .add(jButtonNewNutrient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jButtonEditNutrient, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
+                                .add(jButtonEditNutrient, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
                             .add(jButtonExportNutrientList))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(jButtonDeleteNutrient, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)))
+                        .add(jButtonDeleteNutrient, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)))
                 .add(60, 60, 60))
         );
 
@@ -306,7 +338,7 @@ public class JFrameMain extends javax.swing.JFrame {
                     .add(jButtonEditIngredient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jButtonDeleteIngredient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 69, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jButtonNewIngredient, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 65, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jTabbedPaneMain.addTab("Ingredientes", jPanelIngredients);
@@ -368,7 +400,7 @@ public class JFrameMain extends javax.swing.JFrame {
             jPanelNutritionalSheetDetailLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanelNutritionalSheetDetailLayout.createSequentialGroup()
                 .add(56, 56, 56)
-                .add(jScrollPane5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .add(jScrollPane5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
                 .addContainerGap())
             .add(jPanelNutritionalSheetDetailLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                 .add(jPanelNutritionalSheetDetailLayout.createSequentialGroup()
@@ -431,20 +463,139 @@ public class JFrameMain extends javax.swing.JFrame {
                     .add(jButtonNewNutritionalSheet)
                     .add(jButtonEditNutritionalSheet)
                     .add(jButtonDeleteNutritionalSheet))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         jTabbedPaneMain.addTab("Listas Nutricionales", jPanelNutritionalSheet);
+
+        jTableMixture.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1"
+            }
+        ));
+        jTableMixture.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMixtureMouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(jTableMixture);
+
+        jPanelMixtureDetail.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle de Mezcla"));
+
+        jLabelMixtureName.setText("Nombre de Mezcla:");
+
+        jScrollPaneMixtureName.setBorder(null);
+        jScrollPaneMixtureName.setWheelScrollingEnabled(false);
+
+        jTextAreaMixtureName.setEditable(false);
+        jTextAreaMixtureName.setBackground(new java.awt.Color(240, 240, 240));
+        jTextAreaMixtureName.setColumns(20);
+        jTextAreaMixtureName.setRows(2);
+        jTextAreaMixtureName.setToolTipText("");
+        jTextAreaMixtureName.setAutoscrolls(false);
+        jScrollPaneMixtureName.setViewportView(jTextAreaMixtureName);
+
+        jLabelMixtureDescription.setText("Descripción");
+
+        jScrollPaneMixtureDescription.setBorder(null);
+        jScrollPaneMixtureDescription.setWheelScrollingEnabled(false);
+
+        jTextAreaMixtureDescription.setEditable(false);
+        jTextAreaMixtureDescription.setBackground(new java.awt.Color(240, 240, 240));
+        jTextAreaMixtureDescription.setColumns(20);
+        jTextAreaMixtureDescription.setRows(4);
+        jScrollPaneMixtureDescription.setViewportView(jTextAreaMixtureDescription);
+
+        jButtonShowMixtureDetails.setText("Mostrar Detalle");
+
+        org.jdesktop.layout.GroupLayout jPanelMixtureDetailLayout = new org.jdesktop.layout.GroupLayout(jPanelMixtureDetail);
+        jPanelMixtureDetail.setLayout(jPanelMixtureDetailLayout);
+        jPanelMixtureDetailLayout.setHorizontalGroup(
+            jPanelMixtureDetailLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanelMixtureDetailLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanelMixtureDetailLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(jScrollPaneMixtureName)
+                    .add(jLabelMixtureName)
+                    .add(jLabelMixtureDescription)
+                    .add(jScrollPaneMixtureDescription, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 241, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanelMixtureDetailLayout.createSequentialGroup()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jButtonShowMixtureDetails)
+                .add(74, 74, 74))
+        );
+        jPanelMixtureDetailLayout.setVerticalGroup(
+            jPanelMixtureDetailLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanelMixtureDetailLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jLabelMixtureName)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPaneMixtureName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLabelMixtureDescription)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPaneMixtureDescription, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 30, Short.MAX_VALUE)
+                .add(jButtonShowMixtureDetails))
+        );
+
+        jButtonNewMixture.setText("Nueva Mezcla");
+        jButtonNewMixture.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNewMixtureActionPerformed(evt);
+            }
+        });
+
+        jButtonEditMixture.setText("Modificar Mezcla");
+        jButtonEditMixture.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditMixtureActionPerformed(evt);
+            }
+        });
+
+        jButtonDeleteMixture.setText("Eliminar Mezcla");
+        jButtonDeleteMixture.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteMixtureActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 580, Short.MAX_VALUE)
+            .add(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jScrollPane6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 269, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(18, 18, 18)
+                .add(jPanelMixtureDetail, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .add(jPanel1Layout.createSequentialGroup()
+                .add(64, 64, 64)
+                .add(jButtonNewMixture)
+                .add(18, 18, 18)
+                .add(jButtonEditMixture)
+                .add(18, 18, 18)
+                .add(jButtonDeleteMixture)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 364, Short.MAX_VALUE)
+            .add(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(jScrollPane6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .add(jPanelMixtureDetail, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(26, 26, 26)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jButtonNewMixture)
+                    .add(jButtonEditMixture)
+                    .add(jButtonDeleteMixture))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         jTabbedPaneMain.addTab("Calculos de Mezcla", null, jPanel1, "Calculos de Mezcla");
@@ -702,6 +853,22 @@ public class JFrameMain extends javax.swing.JFrame {
     private void jButtonDeleteNutritionalSheetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteNutritionalSheetActionPerformed
         deleteNutritionalSheet();
     }//GEN-LAST:event_jButtonDeleteNutritionalSheetActionPerformed
+
+    private void jTableMixtureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMixtureMouseClicked
+        loadMixtureDatails(jTableMixture.getSelectedRow());
+    }//GEN-LAST:event_jTableMixtureMouseClicked
+
+    private void jButtonNewMixtureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewMixtureActionPerformed
+        processNewMixture();
+    }//GEN-LAST:event_jButtonNewMixtureActionPerformed
+
+    private void jButtonEditMixtureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditMixtureActionPerformed
+        processEditMixture();
+    }//GEN-LAST:event_jButtonEditMixtureActionPerformed
+
+    private void jButtonDeleteMixtureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteMixtureActionPerformed
+        processDeleteMixture();
+    }//GEN-LAST:event_jButtonDeleteMixtureActionPerformed
     
     private void loadConstraintsByNutritionalSheet(NutrientConstraintSheet nutritionalSheet) {
         try {
@@ -729,6 +896,87 @@ public class JFrameMain extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
+    
+    //---------MIXTURE METHODS
+    private void loadMixtureDatails(int rowIndex) {
+        Mixture mixture = (Mixture)mixtureTableModel.getObjectAtRow(rowIndex);
+        jTextAreaMixtureName.setText(mixture.getName());
+        jTextAreaMixtureDescription.setText(mixture.getDescription());
+    }
+    
+    private void clearMixtureDetails() {
+        jTextAreaMixtureName.setText("");
+        jTextAreaMixtureDescription.setText("");
+    }
+    
+    private void processNewMixture() {
+        //TODO: implement new mixture functionality
+        JDialog formDialog = new JDialog(this, "Nueva Mezcla", true);
+        JPanelMixtureForm mixtureForm = new JPanelMixtureForm(formDialog);
+        formDialog.setContentPane(mixtureForm);
+        System.out.println("Mixture Form size: " + mixtureForm.getPreferredSize());
+        formDialog.pack();
+        //formDialog.setSize(mixtureForm.getPreferredSize());
+        formDialog.setResizable(false);
+        formDialog.setVisible(true);
+        if (mixtureForm.getSuccess()) {
+            System.out.println("Successfully saved");
+            try {
+                mixtureTableModel.setMixtureList(mixtureDao.queryForAll());
+                mixtureTableModel.fireTableDataChanged();
+                clearMixtureDetails();
+            } catch(SQLException ex) {
+                //TODO: handle refresh table data
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    private void processEditMixture() {
+        JDialog formDialog = new JDialog(this, "Modificar Hoja Nutricional", true);
+        int rowIndex = jTableMixture.getSelectedRow();
+        Mixture mixture = (Mixture)mixtureTableModel.getObjectAtRow(rowIndex);
+        JPanelMixtureForm mixtureForm = new JPanelMixtureForm(formDialog, mixture);
+        formDialog.setContentPane(mixtureForm);
+        formDialog.pack();
+        formDialog.setResizable(false);
+        formDialog.setVisible(true);
+        if (mixtureForm.getSuccess()) {
+            System.out.println("Successfully modified");
+            try {
+                mixtureTableModel.setMixtureList(mixtureDao.queryForAll());
+                mixtureTableModel.fireTableDataChanged();
+                clearMixtureDetails();
+            } catch(SQLException ex) {
+                //TODO: handle refresh table data
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    private void processDeleteMixture() {
+        int rowIndex = jTableMixture.getSelectedRow();
+        Mixture mixture = (Mixture)mixtureTableModel.getObjectAtRow(rowIndex);
+        JPanelMixtureForm mixtureForm = new JPanelMixtureForm(mixture);
+        mixtureForm.deleteMixture();
+        if (mixtureForm.getSuccess()) {
+            System.out.println("Successfully deleted");
+            try {
+                mixtureTableModel.setMixtureList(mixtureDao.queryForAll());
+                mixtureTableModel.fireTableDataChanged();
+                clearMixtureDetails();
+            } catch(SQLException ex) {
+                //TODO: handle refresh table data
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    private void showMixtureDetails() {
+        //TODO: implement showMixture details functionality
+    }
+    
+    //---------END MIXTURE METHODS
     
     /**
      * @param args the command line arguments
@@ -770,20 +1018,27 @@ public class JFrameMain extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDeleteIngredient;
+    private javax.swing.JButton jButtonDeleteMixture;
     private javax.swing.JButton jButtonDeleteNutrient;
     private javax.swing.JButton jButtonDeleteNutritionalSheet;
     private javax.swing.JButton jButtonEditIngredient;
+    private javax.swing.JButton jButtonEditMixture;
     private javax.swing.JButton jButtonEditNutrient;
     private javax.swing.JButton jButtonEditNutritionalSheet;
     private javax.swing.JButton jButtonExportNutrientList;
     private javax.swing.JButton jButtonNewIngredient;
+    private javax.swing.JButton jButtonNewMixture;
     private javax.swing.JButton jButtonNewNutrient;
     private javax.swing.JButton jButtonNewNutritionalSheet;
+    private javax.swing.JButton jButtonShowMixtureDetails;
     private javax.swing.JLabel jLabelIngredientName;
+    private javax.swing.JLabel jLabelMixtureDescription;
+    private javax.swing.JLabel jLabelMixtureName;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelHome;
     private javax.swing.JPanel jPanelIngredientDetail;
     private javax.swing.JPanel jPanelIngredients;
+    private javax.swing.JPanel jPanelMixtureDetail;
     private javax.swing.JPanel jPanelNutrients;
     private javax.swing.JPanel jPanelNutritionalSheet;
     private javax.swing.JPanel jPanelNutritionalSheetDetail;
@@ -792,12 +1047,18 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPaneMixtureDescription;
+    private javax.swing.JScrollPane jScrollPaneMixtureName;
     private javax.swing.JTabbedPane jTabbedPaneMain;
     private javax.swing.JTable jTableIngredientDetails;
     private javax.swing.JTable jTableIngredients;
+    private javax.swing.JTable jTableMixture;
     private javax.swing.JTable jTableNutrients;
     private javax.swing.JTable jTableNutritionalConstraints;
     private javax.swing.JTable jTableNutritionalSheets;
+    private javax.swing.JTextArea jTextAreaMixtureDescription;
+    private javax.swing.JTextArea jTextAreaMixtureName;
     private javax.swing.JTextArea jTextAreaNutritionalSheetName;
     // End of variables declaration//GEN-END:variables
 }

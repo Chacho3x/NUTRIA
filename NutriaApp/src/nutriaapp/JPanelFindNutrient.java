@@ -22,7 +22,6 @@ public class JPanelFindNutrient extends javax.swing.JPanel {
     private NutrientDaoImpl nutrientDao;
     private List<Nutrient> originalNutrientList;
     private JDialog container;
-    private static Long lastTimePressed;
     
     public JPanelFindNutrient(JDialog container) {
         this.container = container;
@@ -38,7 +37,6 @@ public class JPanelFindNutrient extends javax.swing.JPanel {
             nutrientTableModel.setNutrientList(originalNutrientList);
             jTableResultNutrients.setModel(nutrientTableModel);
             jTableResultNutrients.removeColumn(jTableResultNutrients.getColumn("id"));
-            lastTimePressed = System.currentTimeMillis();
         } catch(SQLException ex) {
             //TODO: handle initCustomComponents
         }

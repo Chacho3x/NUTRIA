@@ -15,7 +15,7 @@ import org.junit.Test;
  *
  * @author Ariel
  */
-public class MixtureDaoTest {
+public class MixtureDaoTest extends BaseDaoTest {
     
     private MixtureDaoImpl mixtureDao;
     private IngredientDaoImpl ingredientDao;
